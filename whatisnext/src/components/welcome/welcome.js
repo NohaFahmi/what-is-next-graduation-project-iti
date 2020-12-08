@@ -4,31 +4,31 @@ import onlineCourses from '../../assets/online-courses-illustration.jpg';
 import { Menu, Dropdown, Button } from 'antd';
 import { Typography } from 'antd';
 
-import {CaretDownOutlined} from '@ant-design/icons'
+import { CaretDownOutlined } from '@ant-design/icons'
 const WelcomeSection = () => {
-    
-    const {Title} = Typography;
+
+    const { Title } = Typography;
     const menu = (
         <Menu>
-          <Menu.Item>
-            <a target="_blank" href='/'>
-                choice 1
+            <Menu.Item>
+                <a target="_blank" href='/'>
+                    choice 1
             </a>
-          </Menu.Item>
-          <Menu.Item>
-            <a target="_blank" href="/">
-                choice 2
+            </Menu.Item>
+            <Menu.Item>
+                <a target="_blank" href="/">
+                    choice 2
             </a>
-          </Menu.Item>
-          <Menu.Item>
-            <a target="_blank" href="/">
-                choice 3
+            </Menu.Item>
+            <Menu.Item>
+                <a target="_blank" href="/">
+                    choice 3
             </a>
-          </Menu.Item>
+            </Menu.Item>
         </Menu>
-      );
+    );
     return (
-        
+
         <div className="container">
             <div className="text-side">
                 <Title level={1}>Learning Paths</Title>
@@ -49,18 +49,18 @@ const WelcomeSection = () => {
                     <Button className="go-btn btn">
                         GO
                     </Button>
-                    
+
                 </div>
-                
+
             </div>
             <div className="img-side">
                 <img className="img-side" alt='img' src={onlineCourses} />
             </div>
-                
+
         </div>
-                
-                    
-        
+
+
+
     );
 }
 
