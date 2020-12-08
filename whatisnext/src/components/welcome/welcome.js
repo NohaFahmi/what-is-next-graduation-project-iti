@@ -2,10 +2,12 @@
 import './welcome.css';
 import onlineCourses from '../../assets/online-courses-illustration.jpg';
 import { Menu, Dropdown, Button } from 'antd';
+import { Typography } from 'antd';
 
 import {CaretDownOutlined} from '@ant-design/icons'
-
 const WelcomeSection = () => {
+    
+    const {Title} = Typography;
     const menu = (
         <Menu>
           <Menu.Item>
@@ -29,7 +31,8 @@ const WelcomeSection = () => {
         
         <div className="container">
             <div className="text-side">
-                <h1>Learning Paths</h1>
+                <Title level={1}>Learning Paths</Title>
+                {/* <h1>Learning Paths</h1> */}
                 <h2>Find your path. Start your journey.</h2>
                 <p>Our Recommended learning paths are for everyone who wishes to advance their career or even starting new one.</p>
                 <div className="dropdowns">
