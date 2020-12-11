@@ -1,0 +1,30 @@
+.footer {
+    background-color: #3a7c84;
+    font-family: Merriweather;
+    font-size: 16px;
+    color: #ffffff;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.footer-search {
+    width: 56%;
+    padding-left: 6px;
+}
+
+.footer-button {
+    width: 28%;
+    background-color: #E07367;
+    border-radius: 4px;
+}
+.footer-text {
+    padding-top: 15px;
+    width: 280px;
+}
+.socialmedia-icons {
+    padding-left: 43px;
+    margin-top: -15px;
+}
+.socialmedia-icons a {
+    padding: 10px;
+}
