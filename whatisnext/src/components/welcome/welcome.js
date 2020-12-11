@@ -27,7 +27,7 @@ const WelcomeSection = () => {
       );
     return (
         
-        <div className="container">
+        <div className="welcome-container">
             <div className="text-side">
                 <h1>Learning Paths</h1>
                 <h2>Find your path. Start your journey.</h2>

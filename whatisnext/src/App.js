@@ -15,6 +15,7 @@ import reducers from './reducers';
 import Footer from './components/Footer/footer';
 import Index from './components/Index';
 import Nav from './components/Navbar/navbar';
+import Resources from './components/Resources/resource'
 // import {Container,Col,Row} from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,6 +31,7 @@ function App () {
         <Nav/>
         <Route exact path="/" component={Index}/>
         <Route path="/signup" component={Signup}/>
+        <Route path="/resources" component={Resources}/>
         <Footer/>
       </BrowserRouter>  
     </Provider>

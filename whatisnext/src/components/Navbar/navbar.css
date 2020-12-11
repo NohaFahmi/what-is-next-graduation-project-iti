@@ -5,6 +5,8 @@
     font-family: Helvetica Neue;
     font-size: 20px;
     padding: 0 0 ;
+    /* margin-top: -80px;
+    height: 152px; */
     height: 110px;
 }
 
@@ -37,4 +39,15 @@
     padding: 12px; 
     font-size: 35px;
     color: #fff;
+}
+
+.profile-list {
+    background-color: #3A7C84;
+    border: none;
+}
+
+.img-profile{
+    width: 20px;
+    border-radius: 5px;
+    margin-top: -3px;
 }

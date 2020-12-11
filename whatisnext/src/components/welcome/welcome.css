@@ -1,4 +1,4 @@
- .container {
+.welcome-container{
     /* border: 1px solid black; */
     display: flex;
     flex-wrap: nowrap;
@@ -10,32 +10,32 @@
     
 }
 
-.container .text-side h1 {
+.welcome-container.text-side h1 {
     display: block;
     font-size: 2.5rem;
 }
-.container .text-side h2 {
+.welcome-container.text-side h2 {
     font-size: 2rem;
     margin: 30px 0;
 }
 
-.container .text-side {
+.welcome-container.text-side {
     /* width: 60%; */
     margin-top: 50px;
     flex: 1;
     padding-right: 30px;
 }
-.container .img-side img{
+.welcome-container.img-side img{
     width: 100%;  
 }
-.container .img-side {
+.welcome-container.img-side {
     /* width: 80%; */
     /* min-width: 50%; */
     /* height: 500px; */
     flex: 2;
     
 }
-.container .dropdowns {
+.welcome-container.dropdowns {
     display: flex;
     margin-top: 100px;
 }
