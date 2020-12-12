@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 import {addUser} from '../../actions';
 
 class signUp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       fields: {
         // f_name: '',

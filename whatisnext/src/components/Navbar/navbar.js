@@ -17,7 +17,7 @@ class Nav extends Component {
             <div className=" navbar">
             <div className="container">
                 <div className="logo">
-                    <img src={logo} />
+                    <img src={logo} alt="logo"/>
                 </div>
                 <div className="nav-anchors">
                     <Link to="/" style={{textDecoration: 'none' , color: 'white'}}>Home</Link>
