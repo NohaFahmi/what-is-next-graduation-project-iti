@@ -4,6 +4,7 @@ import './resource.css'
 import {Card} from 'antd'
 import {ArrowRightOutlined} from '@ant-design/icons'
 
+
 class Resources extends Component {
     constructor(){
         super()
@@ -29,7 +30,7 @@ class Resources extends Component {
                 <div className="res-card"> 
                     <Card
                         hoverable
-                        style={{ width: 320 }}
+                        style={{ width: 330 }}
                         cover={<img alt="resource-cover" src={resource.image} />} >
                         
                         <h5>{resource.title}</h5>
@@ -37,7 +38,7 @@ class Resources extends Component {
                         <hr/>
                         <div className="res-details">
                             <a>{resource.time}</a> <a>{resource.price}</a>
-                            <button>Start <ArrowRightOutlined className="arrow-icon"/></button>
+                            <button>Start <ArrowRightOutlined/></button>
                         </div>
                     </Card>
                 </div> 

@@ -4,6 +4,10 @@ import logo from '../../assets/surface1.svg'
 import profilePic from '../../assets/blank-profile.png'
 import {SearchOutlined} from '@ant-design/icons';
 import React, { Component } from 'react';
+//// const ScrollLink = Scroll.ScrollLink
+// import {Link} from 'react-scroll'
+import { HashLink } from 'react-router-hash-link';
+
 
 class Nav extends Component {
     constructor(){
@@ -21,8 +25,21 @@ class Nav extends Component {
                 </div>
                 <div className="nav-anchors">
                     <Link to="/" style={{textDecoration: 'none' , color: 'white'}}>Home</Link>
-                    <a>About Us</a>
-                    <a>Explore Career</a>
+                    <HashLink
+                    spy={true} 
+                    smooth={true} 
+                    duration={500}
+                    to="/#about-us"
+                    >About Us
+                    </HashLink>
+                    
+                    <HashLink
+                     spy={true} 
+                     smooth={true} 
+                     duration={500}
+                     to="/#explore-career"
+                    >
+                    Explore Career</HashLink>
                 </div>
                 <div>
                      <input type="text" className="navbar-search" placeholder="Search..."/>
