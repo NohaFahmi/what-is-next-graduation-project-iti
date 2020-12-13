@@ -8,6 +8,7 @@ class Tabs extends Component {
         return (
             <div>
                 <BrowserRouter>
+                <SecondNav/>
                 <Route path="/resources" component={Resources}/>
                 </BrowserRouter>
                 

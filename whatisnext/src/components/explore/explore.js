@@ -4,8 +4,8 @@ import SecondNav from '../secondNav/second-nav.js'
 
 const Explore = () => {
     return(
-        <div>
-            <SecondNav/>
+
+
                     <div className="careers-container">
             <h2>Explore Careers</h2>
             <div className="cards" id='explore-career'>
@@ -18,7 +18,7 @@ const Explore = () => {
             </div>
 
         </div>
-        </div>
+
         
     );
 }

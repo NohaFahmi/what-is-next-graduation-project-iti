@@ -17,12 +17,9 @@ class Resources extends Component {
 
     render() {
         return (
-            <div>
-                     <SecondNav/>
                      <Container className="res-card">
                 {this.renderResources(this.state)}
                 </Container>
-            </div>
 
         );
     }

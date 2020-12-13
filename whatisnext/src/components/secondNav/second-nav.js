@@ -17,7 +17,7 @@ const SecondNav = ()=>{
                     <Link to="/resources" style={{color:'white'}}>Resources</Link>
                     </Col>
                     <Col style={{border:'2px solid white'}} lg={4}>
-                    <Link to="/cards" style={{color:'white'}}>Community</Link>
+                    <Link style={{color:'white'}}>Community</Link>
                     </Col>
             </Row>
 
