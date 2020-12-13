@@ -3,7 +3,7 @@ import {Container,Col,Row} from 'react-bootstrap';
 import './resource.css'
 import {Card} from 'antd'
 import {ArrowRightOutlined} from '@ant-design/icons'
-
+import SecondNav from '../secondNav/second-nav.js'
 
 class Resources extends Component {
     constructor(){
@@ -17,9 +17,13 @@ class Resources extends Component {
 
     render() {
         return (
-                <Container className="res-card">
+            <div>
+                     <SecondNav/>
+                     <Container className="res-card">
                 {this.renderResources(this.state)}
                 </Container>
+            </div>
+
         );
     }
 

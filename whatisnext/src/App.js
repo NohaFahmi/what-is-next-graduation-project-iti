@@ -14,30 +14,12 @@ import reducers from './reducers';
 import Footer from './components/Footer/footer';
 import Index from './components/Index';
 import Nav from './components/Navbar/navbar';
-import Resources from './components/Resources/resource'
+import Resources from './components/Resources/resource.js'
+import SecondNav from './components/secondNav/second-nav'
+import Tabs from './components/tabs/tabs.js'
 
 //1. create store
 const createStoreWithMW = applyMiddleware(promiseMiddleware)(createStore);
-
-
-// function App () {
-  
-//   return (
-//     <Provider store={createStoreWithMW(reducers)}>
-//       <BrowserRouter>
-//         <Nav/>
-//         <Route exact path="/" component={Index}/>
-//         <Route path="/signup" component={Signup}/>
-//         <Route path="/resources" component={Resources}/>
-//         <Footer/>
-//       </BrowserRouter>  
-//     </Provider>
-//   );
-// }
-
-// export default App;
-
-
 
 class App extends Component {
   constructor(){
@@ -55,6 +37,8 @@ class App extends Component {
                <Route exact path="/" component={Index}/>
                <Route path="/signup" component={Signup}/>
                <Route path="/resources" component={Resources}/>
+               <Route path="/nav2" component={SecondNav}/>
+               <Route path="/tabs" component={Tabs}/>
                <Footer/>
              </BrowserRouter>  
            </Provider>
