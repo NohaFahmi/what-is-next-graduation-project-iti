@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 import {addUser} from '../../actions';
 
 class signUp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       fields: {
         // f_name: '',
@@ -158,19 +158,19 @@ class signUp extends Component {
               <div className="username">
                 <input type="text" placeholder="first name" name="f_name" onChange={this.handleChange} value={this.state.fields['f_name']} required/>
 
-                <p style={{color: 'red'}}>{this.state.errors['f_name']}</p>
+                <p style={{color: 'red' , display: 'contents'}}>{this.state.errors['f_name']}</p>
                 <input type="text" placeholder="last name" name="l_name" onChange={this.handleChange}  required/>
-                <p style={{color: 'red'}}>{this.state.errors['l_name']}</p>
+                <p style={{color: 'red' ,display: 'contents'}}>{this.state.errors['l_name']}</p>
               </div>
               <div className="signUp-form">
                 <input type="email" placeholder="Email Address" name="email" onChange={this.handleChange} required/>
-                <p style={{color: 'red'}}>{this.state.errors['email']}</p>
+                <p className="info-err">{this.state.errors['email']}</p>
 
                 <input type="password" placeholder="Password" name="password" onChange={this.handleChange} required/>
-                <p style={{color: 'red'}}>{this.state.errors['password']}</p>
+                <p className="info-err">{this.state.errors['password']}</p>
 
                 <input type="password" placeholder="Confirm Password" name='confirm_password' onChange={this.handleChange} required/>
-                <p style={{color: 'red'}}>{this.state.errors['password']}</p>
+                <p className="info-err">{this.state.errors['password']}</p>
 
               </div>
               <div className="privacy-text">
@@ -217,7 +217,13 @@ class signUp extends Component {
               </div>
 
               <div className="signIn-btn">
-                <input type="submit" value="Sign In" />
+                <input type="submit" value="Sign In"
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.setState({ profile: true });
+                  
+                }}
+                />
               </div>
             </form>
           )}

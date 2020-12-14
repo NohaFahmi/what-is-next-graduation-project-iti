@@ -1,6 +1,6 @@
 import React from 'react'
 import './footer.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container,Col,Row} from 'react-bootstrap';
 import logo from '../../assets/surface1.svg'
 import { FacebookOutlined , GithubOutlined ,LinkedinOutlined ,TwitterOutlined} from '@ant-design/icons';
@@ -11,7 +11,7 @@ const Footer = ()=>{
                 <Row>
                 <Col lg={4}>
                     <div className="logo">
-                       <img src={logo}/>
+                       <img src={logo} alt="logo"/>
                     </div>
                     
                     <p className="footer-text">What's Next is a website offers the help for anybody wants to 
