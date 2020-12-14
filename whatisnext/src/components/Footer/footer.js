@@ -17,26 +17,26 @@ const Footer = ()=>{
                     <p className="footer-text">What's Next is a website offers the help for anybody wants to 
                         know how to be whatever he wants.</p>
                         <div className="socialmedia-icons">
-                            <a><GithubOutlined /></a>
-                            <a><LinkedinOutlined /></a>
-                            <a><TwitterOutlined /></a>
-                            <a><FacebookOutlined /></a>
+                            <a href=' '><GithubOutlined /></a>
+                            <a href=' '><LinkedinOutlined /></a>
+                            <a href=' '><TwitterOutlined /></a>
+                            <a href=' '><FacebookOutlined /></a>
                         </div>
                         
                 </Col>
 
-                <Col lg={{span:2}}><a><p>Home</p></a>
-                <a><p>About Us</p></a>
-                <a><p>Explore Career</p></a>
+                <Col lg={{span:2}}><a href=' ' className="footer-link"><p>Home</p></a>
+                <a href=' ' className="footer-link"><p>About Us</p></a>
+                <a href=' ' className="footer-link"><p>Explore Career</p></a>
                 </Col>
 
-                <Col lg={{offset:1 ,span:2}}><a><p>Roadmap</p></a>
-                <a><p>Resources</p></a>
-                <a><p>Community</p></a>
+                <Col lg={{offset:1 ,span:2}}><a href=' ' className="footer-link"><p>Roadmap</p></a>
+                <a href=' ' className="footer-link"><p>Resources</p></a>
+                <a href=' ' className="footer-link"><p>Community</p></a>
                 </Col>
 
                 <Col lg={3}><p>Get Our Newsletter</p>
-                <input type="text" className="footer-search" placeholder="Subscribe!"/>
+                <input type="text" className="footer-subscribe" placeholder="Subscribe!"/>
                 <input type="button" value="done" className="footer-button"/>
                 
                 </Col>

@@ -11,12 +11,13 @@ import  promiseMiddleware  from 'redux-promise';
 import reducers from './reducers';
 
 //components
-import Footer from './components/Footer/footer';
+import Footer from './components/footer/footer';
 import Index from './components/Index';
-import Nav from './components/Navbar/navbar';
+import Nav from './components/navbar/navbar';
 import Resources from './components/resources/resource.js'
 import SecondNav from './components/secondNav/second-nav'
 import Tabs from './components/tabs/tabs.js'
+import Roadmap from './components/roadmap/roadmap';
 
 //1. create store
 const createStoreWithMW = applyMiddleware(promiseMiddleware)(createStore);
@@ -39,6 +40,8 @@ class App extends Component {
                <Route path="/resources" component={Resources}/>
                <Route path="/nav2" component={SecondNav}/>
                <Route path="/tabs" component={Tabs}/>
+               <Route path="/roadmap" component={Roadmap}/>
+
                <Footer/>
              </BrowserRouter>  
            </Provider>

@@ -8,6 +8,7 @@ import { createFromIconfontCN } from '@ant-design/icons';
 //components
 import Tasks from './tasks';
 import Stepper from './stepper';
+import Loading from '../loading/loading';
 
 
 //IconFont
@@ -91,7 +92,7 @@ class Roadmap extends Component {
     renderStepsWrapper = ({ steps }) => {
 
         if (steps) {
-            return steps.map((step) => {
+            return steps.map((step, index) => {
                 return (
                     <div key={`main-${step.id}`}>
                         <div className="step-wrapper">
@@ -126,14 +127,14 @@ class Roadmap extends Component {
                             {(this.state.visible_task && (step.tasks.length > 0) && (this.state.checked_btn === 'check-' + step.id)) && <Tasks tasks={step.tasks} id={step.id} state={this.state} />}
 
                         </div>
-
-                        <Divider type="vertical" className="line" orientation='left' />
+                        {(index === (steps.length -1)) ? " " : <Divider type="vertical" className="line" orientation='left' />}
+                        
                     </div>
                 );
             })
         }
 
-        return <p>Roadmap is Loading</p>
+        return <Loading />
     }
     render() {
         return (

@@ -4,6 +4,7 @@
         "antd",
         "currentlocation",
         "dropdowns",
-        "hoverable"
+        "hoverable",
+        "socialmedia"
     ]
 }

@@ -1,6 +1,6 @@
 import CareerCard from "../career-card/career-card";
 import './explore.css';
-import SecondNav from '../secondNav/second-nav.js'
+// import SecondNav from '../secondNav/second-nav.js'
 const Explore = () => {
     return(
         <div className="careers-container">

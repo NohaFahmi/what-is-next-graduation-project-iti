@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import React, { useState } from 'react';
+import Loading from '../loading/loading';
 
 const Tasks = (props) => {
     // console.log(props);
@@ -45,7 +46,7 @@ const Tasks = (props) => {
             })
         }
     
-        return <p>Tasks are loading!</p>
+        return <Loading />
     }
     
     return (

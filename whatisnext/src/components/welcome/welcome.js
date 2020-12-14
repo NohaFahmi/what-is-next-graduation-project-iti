@@ -43,7 +43,7 @@ const WelcomeSection = () => {
                         <Button className="drop-tracks">Tracks <CaretDownOutlined /></Button>
                     </Dropdown>
 
-                    <Button className="go-btn btn">
+                    <Button className="go-btn">
                         GO
                     </Button>
                     

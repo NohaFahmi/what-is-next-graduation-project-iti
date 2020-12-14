@@ -40,7 +40,7 @@ class Nav extends Component {
                 </div>
                 <div>
                      <input type="text" className="navbar-search" placeholder="Search..."/>
-                       <a className="searchIcon"><SearchOutlined  /></a>  
+                       <a href=' ' className="searchIcon"><SearchOutlined  /></a>  
     
                      
                 </div>
@@ -55,7 +55,7 @@ class Nav extends Component {
                 {/* PROFILE LIST */}
                 {this.state.profile && (
                     <div>
-                        <img src={profilePic} className="img-profile"/>
+                        <img src={profilePic} className="img-profile" alt='img-profile' />
                         <select className="profile-list">
                             <option>Setting</option>
                             <option>Logout</option>

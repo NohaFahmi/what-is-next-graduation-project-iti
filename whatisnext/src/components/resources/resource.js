@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import './resource.css'
 import { Card } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons'
-import SecondNav from '../secondNav/second-nav.js'
+// import SecondNav from '../secondNav/second-nav.js'
+import Loading from './../loading/loading';
 
 class Resources extends Component {
     constructor() {
@@ -38,7 +39,7 @@ class Resources extends Component {
                         <h6>{resource.hashtags}</h6>
                         <hr />
                         <div className="res-details">
-                            <a>{resource.time}</a> <a>{resource.price}</a>
+                            <a href=' '>{resource.time}</a> <a href=' '>{resource.price}</a>
                             <button>Start <ArrowRightOutlined /></button>
                         </div>
                     </Card>
@@ -47,7 +48,7 @@ class Resources extends Component {
             ))
 
         }
-        return "NO RESOURCES"
+        return <Loading />
     }
     componentDidMount() {
         fetch(this.baseURL)
