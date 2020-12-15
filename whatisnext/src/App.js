@@ -18,6 +18,9 @@ import Resources from './components/resources/resource.js'
 import SecondNav from './components/secondNav/second-nav'
 import Tabs from './components/tabs/tabs.js'
 import Roadmap from './components/roadmap/roadmap';
+import Settings from './components/account-settings/setting';
+import Profile from './components/profile/profile';
+import CareerInformation from "./components/career-information/careerInformation";
 
 //1. create store
 const createStoreWithMW = applyMiddleware(promiseMiddleware)(createStore);
@@ -41,6 +44,9 @@ class App extends Component {
                <Route path="/nav2" component={SecondNav}/>
                <Route path="/tabs" component={Tabs}/>
                <Route path="/roadmap" component={Roadmap}/>
+               <Route path="/settings" component={Settings}/>
+               <Route path="/profile" component={Profile}/>
+               <Route exact path="/careerinformation" component={CareerInformation} />
 
                <Footer/>
              </BrowserRouter>  

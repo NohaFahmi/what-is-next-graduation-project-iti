@@ -1,0 +1,57 @@
+.settings-container {
+    /* border: 1px solid black; */
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+.settings-container h2 {
+    border: 1px solid black;
+    border-radius: 10px;
+    /* width: 300px; */
+    padding: 10px;
+    background-color: black;
+    color: whitesmoke;
+}
+
+.sidebar {
+    border: 1px solid lightgray;
+    box-shadow: 3px 3px 3px lightgray;
+    /* background-color: black; */
+    color: whitesmoke;
+    border-radius: 10px;
+    padding-top: 20px;
+}
+
+.log-out-btn {
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px 20px;
+}
+
+.log-out-btn:hover {
+    background-color: whitesmoke;
+    color: black
+}
+
+.settings-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    /* border: 1px solid black; */
+    text-align: center;
+}
+
+.settings-avatar img {
+    width: 100%;
+    
+}
+
+h5 {
+    margin: 20px 0;
+}

@@ -21,6 +21,20 @@ export const addUser = async(userInfo) => {
     }
 }
 
+//Get UserData API
+const userURL = "http://localhost:3010/user";
+export const getUserData = async() => {
+    
+    const res = await fetch(userURL);
+
+    let payload = await res.json();
+    
+    console.log("USER DATA", payload);
+    return {
+        type: 'GET_USER_DATA',
+        payload
+    }
+}
 // Roadmaps API
 
 const dataURL = "http://localhost:3002/steps";
@@ -33,5 +47,14 @@ export const getRoadmap = async() => {
     return {
         type:"GET_ROADMAP",
         payload
+    }
+}
+
+//pass All user data between components
+export const updateUserData = (arr) => {
+    
+    return {
+        type:"UPDATE_USER_DATA",
+        payload: arr
     }
 }

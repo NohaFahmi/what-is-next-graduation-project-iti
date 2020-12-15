@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "f-name": "Noha",
-      "l-name": "Mohammed",
-      "age": 20,
-      "email": "nm1488@fayoum.edu.eg",
-      "password": "@123Noha"
-    },
-    {
       "f_name": "menna",
       "l_name": "ahmed",
       "password": "12333",

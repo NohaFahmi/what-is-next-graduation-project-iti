@@ -4,5 +4,5 @@ import {roadmap} from './roadmap'
 
 export default combineReducers({
     users: users,
-    roadmap: roadmap
+    roadmap: roadmap,
 })
