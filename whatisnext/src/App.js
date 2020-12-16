@@ -11,13 +11,14 @@ import  promiseMiddleware  from 'redux-promise';
 import reducers from './reducers';
 
 //components
-import Footer from './components/footer/footer';
+import Footer from './components/Footer/footer.js';
 import Index from './components/Index';
-import Nav from './components/navbar/navbar';
+import Nav from './components/Navbar/navbar.js';
 import Resources from './components/resources/resource.js'
 import SecondNav from './components/secondNav/second-nav'
 import Tabs from './components/tabs/tabs.js'
 import Roadmap from './components/roadmap/roadmap';
+import Community from './components/community/community.js'
 import Settings from './components/account-settings/setting';
 import Profile from './components/profile/profile';
 import CareerInformation from "./components/career-information/careerInformation";
@@ -44,6 +45,7 @@ class App extends Component {
                <Route path="/nav2" component={SecondNav}/>
                <Route path="/tabs" component={Tabs}/>
                <Route path="/roadmap" component={Roadmap}/>
+               <Route path="/community" component={Community}/>
                <Route path="/settings" component={Settings}/>
                <Route path="/profile" component={Profile}/>
                <Route exact path="/careerinformation" component={CareerInformation} />
