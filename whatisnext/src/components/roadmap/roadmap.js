@@ -177,7 +177,7 @@ class Roadmap extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log('STATE', state.roadmap.steps);
+    // console.log('STATE', state.current);
     return {
         steps: state.roadmap.steps,
     }

@@ -243,7 +243,7 @@
 
 
 .progress-container {
-    /* margin-top: 20px; */
+    margin-top: 40px;
     /* border: 1px solid black; */
     display: flex;
     align-items: center;

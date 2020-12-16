@@ -58,3 +58,35 @@ export const updateUserData = (arr) => {
         payload: arr
     }
 }
+
+//samples API
+export const getSamples = async() => {
+
+    const response = await fetch("http://localhost:3003/samples");
+    let payload = await response.json();
+    console.log("DATA", payload);
+    return {
+        type:"GET_SAMPLES",
+        payload
+    }
+}
+
+export const addSample = async(sampleInfo) => {
+
+    console.log("ACTION RECEIVED DATA", sampleInfo);
+    
+    const res = await fetch("http://localhost:3003/samples", {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify(sampleInfo)
+    });
+
+    let payload = await res.json();
+    
+    return {
+        type: 'ADD_SAMPLE',
+        payload
+    }
+}
