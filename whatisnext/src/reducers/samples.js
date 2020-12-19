@@ -1,6 +1,6 @@
 export const samples = (state={}, action) => {
     
-    console.log("ACTION", action.type);
+    console.log("ACTION", action);
 
     switch(action.type) {        
         case 'ADD_SAMPLE' : {

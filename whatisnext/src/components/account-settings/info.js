@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import {DatePicker, Input } from 'antd';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import { withRouter } from 'react-router-dom';
 // CountryRegionData
 class Info extends Component {
 
@@ -14,7 +15,8 @@ class Info extends Component {
 
             },
             save_disabled: true,
-            bio: ""
+            bio: "",
+            
         };
 
         // const userInfo = this.props.userInfo[0];
@@ -65,6 +67,8 @@ class Info extends Component {
         }
         this.props.getData(data);
     }
+
+   
     render() {
         return(
             <div className="Content-container">
@@ -115,23 +119,8 @@ class Info extends Component {
         )
     }
 
-    componentDidMount() {
-        // console.log(this.props.user_info);
-        // let data = {
-        //     age: this.state.info.age,
-        //     gender: this.state.info.gender,
-        //     location: {
-        //         country: this.state.country,
-        //         city: this.state.region
-        //     },
-        //     bio: this.state.bio
-        // }
-        // this.props.getData(data);
-    }
+    
 
-    componentDidUpdate() {
-       
-    }
 }
 
 export default Info;

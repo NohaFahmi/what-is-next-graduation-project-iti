@@ -1,6 +1,7 @@
 import { Button } from 'antd'
 import React, { useState } from 'react';
 import Loading from '../loading/loading';
+import { withRouter } from 'react-router-dom';
 
 const Tasks = (props) => {
     // console.log(props);
@@ -59,12 +60,12 @@ const Tasks = (props) => {
                     {renderTasks()}
                 </div>
 
-                <Button size='large' className="submit-tasks-btn">
+                <a size='large' className="submit-tasks-btn btn-success" href='/profile' >
                     Submit Your tasks
-                </Button>
+                </a>
             </div>
         </div>
     );
 }
 
-export default Tasks;
+export default withRouter(Tasks);

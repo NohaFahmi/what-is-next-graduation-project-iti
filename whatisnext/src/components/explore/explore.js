@@ -18,7 +18,7 @@ class Explore extends Component {
 
   renderCardsCareers = ({careersList}) => {
     if(careersList) {
-      console.log(careersList.career)
+      // console.log(careersList.career)
       return careersList.career.map( (career) => {
         return <CareerCard careerTitle={career.careerName}/>
       })

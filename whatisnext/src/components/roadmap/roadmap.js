@@ -77,11 +77,11 @@ class Roadmap extends Component {
     }
 
     increase = ({ steps }) => {
-        console.log("CURRENT", this.state.current)
+        // console.log("CURRENT", this.state.current)
         this.setState({ percent: Math.floor((((this.state.current + 1) * 100) / steps.length)) })
     }
     decrease = ({ steps }) => {
-        console.log("CURRENT", this.state.current)
+        // console.log("CURRENT", this.state.current)
         this.setState({ percent: Math.floor((((this.state.current - 1) * 100) / steps.length)) })
     }
 
@@ -169,12 +169,17 @@ class Roadmap extends Component {
 
                         {((!this.state.disabled)) ? this.renderCircularProgress() : ''}
 
-                        <button className='save' onClick={this.handleSave}>Save Progress</button>
 
                     </div>
                 </div>
                 <div className='step-container'>
-                    <Stepper current={this.state.current}/>
+                    <div className='stp-cont'>
+
+                        <button className='save' onClick={this.handleSave}>Save Progress</button>
+
+                        <Stepper current={this.state.current}/>
+                    </div>
+                    
                     
                     <div className="roadmap">
                         {this.renderStepsWrapper(this.props)}
@@ -212,7 +217,7 @@ class Roadmap extends Component {
         // this.setState({'percent': localStorage.getItem('current-percent')})
 
         
-        console.log(selectedTrack)
+        // console.log(selectedTrack)
     }
 
     

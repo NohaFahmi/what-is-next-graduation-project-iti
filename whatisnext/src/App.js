@@ -24,6 +24,7 @@ import CareerInformation from "./components/career-information/careerInformation
 import Footer from './components/footer/footer';
 // import RedirectToSignup from './components/redirectToSignup';
 import { Redirect } from 'react-router-dom';
+import Login from './containers/SignUp/login';
 
 //1. create store
 const createStoreWithMW = applyMiddleware(promiseMiddleware)(createStore);
@@ -56,7 +57,9 @@ class App extends Component {
       <div>
            <Provider store={createStoreWithMW(reducers)}>
              <BrowserRouter>
-             <Navigation/>
+             
+
+             {(this.state.isNavBarHidden) ? null : <Navigation/>}
 
               <Switch>
                 <Route exact path="/" component={Index}/>

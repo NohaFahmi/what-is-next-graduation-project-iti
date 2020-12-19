@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import Login from './login';
 
 //actions
 // import {addUser} from '../../actions';
@@ -117,14 +118,7 @@ class signUp extends Component {
     return formIsValid;
   }
   //adding handleChange function to input
-  handleOnChangeLogin = (e) => {
-
-    let loginData = this.state.loginData
-
-    loginData[e.target.name] = e.target.value
-
-    this.setState({loginData});
-  }
+  
 
   handleChange = (e) => {
     let fields = this.state.fields
@@ -171,18 +165,15 @@ class signUp extends Component {
       console.log('Submitted!', this.state.userData);
 
       this.props.addUser(this.state.userData);
+      // this.props.history.push('/login');
+      this.setState({'sign_In': true})
 
     } else {
       console.log("form has errors");
     }
 
   }
-  handleSignIn = (e) => {
-    e.preventDefault();
-      console.log('SignedIn!', this.state.userData);
-      this.props.getUserData(this.state.loginData);
-      this.props.history.push('/');
-  }
+  
 
   render() {
     return (
@@ -251,25 +242,7 @@ class signUp extends Component {
            {/**************** * SIGN UP end*********************/}
             {/**************** * SIGN IN START*********************/}
           {this.state.sign_In && (
-            <form onSubmit={this.handleSignIn}>
-              <div className="signUp">
-                <p>Sign in</p>
-                <p>Welcome Back</p>
-              </div>
-              <div className="signUp-form">
-                <input type="text" placeholder="Email Address" onChange={this.handleOnChangeLogin} name="mail"/>
-
-                <input type="text" placeholder="Password" onChange={this.handleOnChangeLogin} name="password" />
-
-              </div>
-              <div className="signIn-text">
-                <a href=" ">Forgot Password?</a>
-              </div>
-
-              <div className="signIn-btn">
-                <input type="submit" value="Sign In"/>
-              </div>
-            </form>
+            <Login />
           )}
           {/**************** * SIGN IN END*********************/}
         </div>
@@ -278,10 +251,7 @@ class signUp extends Component {
     );
   }
 
-  componentWillUnmount() {
-    localStorage.setItem("user_auth", this.props.user_auth);
-    localStorage.setItem("user_mail", this.state.userData.mail);
-  }
+ 
 }
 
 

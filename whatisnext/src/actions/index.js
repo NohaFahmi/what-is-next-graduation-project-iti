@@ -3,7 +3,7 @@
 
 export const addUser = async(userInfo) => {
 
-    console.log("ACTION RECEIVED DATA", userInfo);
+    // console.log("ACTION RECEIVED DATA", userInfo);
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,7 +23,7 @@ export const addUser = async(userInfo) => {
 //Get UserData API
 // const userURL = "http://localhost:3010/user";
 export const getUserData = async(loginInfo) => {
-    console.log(loginInfo)
+    // console.log(loginInfo)
     const res = await fetch('http://localhost:3000/users/signin', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -33,7 +33,7 @@ export const getUserData = async(loginInfo) => {
 
     let payload = await res.json();
     
-    console.log("USER DATA", payload.message);
+    console.log("USER DATA LOGIN", payload.message);
     return {
         type: 'GET_USER_DATA',
         payload: payload.message
@@ -44,12 +44,12 @@ export const getUserData = async(loginInfo) => {
 // const dataURL = ;
 
 export const getRoadmap = async(career, track) => {
-    console.log(career);
+    // console.log(career);
     const response = await fetch("http://localhost:3000/career/");
-    console.log(response)
+    // console.log(response)
     let payload = await response.json();
     // let payload = 
-    console.log("DATA", payload);
+    // console.log("GET ROADMAP", payload);
     return {
         type:"GET_ROADMAP",
         payload: payload.career.map( (cr) => {
@@ -79,7 +79,7 @@ export const getUserById = async(id) => {
 //update user data by id:
 export const updateUserById = async(id, userInfo) => {
 
-    console.log("ACTION RECEIVED DATA", userInfo);
+    // console.log("ACTION RECEIVED DATA", userInfo);
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -143,7 +143,7 @@ export const getCareers = async() => {
 //get userCareer 
 export const UpdateUserCareers = async(career_id, careerInfo) => {
 
-    console.log("ACTION RECEIVED DATA", careerInfo);
+    // console.log("ACTION RECEIVED DATA", careerInfo);
     const requestOptions = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -165,7 +165,7 @@ export const gatAllUserCareer = async() => {
 
     const response = await fetch("http://localhost:3000/userCareer/");
     let payload = await response.json();
-    console.log("DATA", payload);
+    // console.log("DATA", payload);
     return {
         type:"GET_ALL_USER_CAREER",
         payload

@@ -18,7 +18,7 @@ class Profile extends Component {
         super();
 
         this.state = {
-            current: 5,
+            current: 0,
             sample_type: ""
         }
     }
@@ -54,12 +54,13 @@ class Profile extends Component {
                     <div className="bio-container">
                         <Row className="bio-row">
                             <Col>
-                                <p className="bio">Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer</p>
+                                <p className="bio">Engineer graduate with a great passion for Programming</p>
                             </Col>
                         </Row>
                         
                         <Row className="justify-content-between mt-5">
-                            <Col xs='auto'><p className="location">{this.props.all_user_data.location}</p></Col>
+                        {/* {this.props.all_user_data.location} */}
+                            <Col xs='auto'><p className="location">Egypt, Cairo</p></Col>
                             <Col xs='auto'>
                             
                                 <div className="social-icons">
@@ -67,10 +68,6 @@ class Profile extends Component {
                                     <a href={this.props.all_user_data.socialLinks} className='linkedin'><LinkedinOutlined style={{ color: '#0073b1', marginLeft: '15px' }} /> </a>
                                     <a href={this.props.all_user_data.socialLinks} className='twitter'><TwitterOutlined style={{ color: '#1da1f2', marginLeft: '10px' }} /></a>
                                 </div>
-
-                                
-                              
-                            
                             </Col>
                         </Row>
 
@@ -90,6 +87,7 @@ class Profile extends Component {
                 <div className="profile-body">
                     <div className="user-current-progress">
                         <div className="current-progress">
+                            <a href='/tabs/roadmap' className='btn-demo--white'>Back To Roadmap</a>
                             <h5>Your Progress</h5>
                             <Steps current={this.state.current} onChange={this.onChange} direction="vertical">
                                 
@@ -160,7 +158,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('STATE PROFILES', state);
+    // console.log('STATE PROFILE', state.users.all_user_info);
     return {
         // users: state.users.user_data,
         all_user_data: state.users.all_user_info,

@@ -20,14 +20,16 @@ class WelcomeSection extends Component {
             trackSelected: "",
             career_id: "",
             // redirect: "/roadmap"
-            user_id: ""
+            user_id: "",
+            user: "",
+            profile: false
         }
     }
     saveIdAndCareerID = ({userInfo, careersList}) => {
         if(careersList) {
             return careersList.career.map( (career) => {
                 if(career.careerName === this.state.careerSelected) {
-                    console.log(career._id);
+                    // console.log(career._id);
                     
                     this.setState({'career_id': career._id});
 
@@ -36,7 +38,7 @@ class WelcomeSection extends Component {
         }
         
         if(userInfo) {
-            console.log(userInfo._id)
+            // console.log(userInfo._id)
             this.setState({'user_id': userInfo._id});
         }
     }
@@ -58,18 +60,26 @@ class WelcomeSection extends Component {
         this.props.history.push('/tabs/roadmap')
     }
     handleClick = (e) => {
-        if((this.state.tracksSelected !== undefined )&& (this.state.careerSelected !== undefined)) {
-            localStorage.setItem('selectedCareer', this.state.careerSelected);
-            localStorage.setItem('selectedTrack', this.state.tracksSelected);
-            let info = {
-                career: this.state.career_id,
-                user: [
-                    {id: this.state.user_id, step:0}
-                ]
+
+        if(this.state.profile) {
+            if((this.state.tracksSelected !== undefined )&& (this.state.careerSelected !== undefined)) {
+                localStorage.setItem('selectedCareer', this.state.careerSelected);
+                localStorage.setItem('selectedTrack', this.state.tracksSelected);
+                let info = {
+                    career: this.state.career_id,
+                    user: [
+                        {id: this.state.user_id, step:0}
+                    ]
+                }
+                this.props.UpdateUserCareers(this.state.career_id,info)
+                this.redirectToTarget();
             }
-            this.props.UpdateUserCareers(this.state.career_id,info)
-            this.redirectToTarget();
+        } else {
+        
+            this.props.history.push('/signup')
+
         }
+        
     }
     renderCareers = ({careersList}) => {
         if(careersList) {
@@ -145,7 +155,19 @@ class WelcomeSection extends Component {
         this.props.getCareers();
         const user_mail = localStorage.getItem("user_mail");
         // console.log(user_mail)
-        this.props.getUserInfo(user_mail);
+        if(user_mail) {
+        
+            this.props.getUserInfo(user_mail);
+
+        }
+
+        const login_token = localStorage.getItem('user_auth');
+        if(login_token) {
+                    // const user_founded = JSON.parse(login_token);
+            this.setState({ 'user': login_token })
+            this.setState({'profile': true})
+        }
+        document.querySelector('#first-navbar').style.display = 'block'
 
         // console.log(this.state.user_id);
         // this.props.UpdateUserCareers()

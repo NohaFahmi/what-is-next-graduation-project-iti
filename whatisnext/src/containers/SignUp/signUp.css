@@ -130,5 +130,11 @@
     
 }
 
+.parent {
+    border: 1px solid black;
+    width: 85%;
+    position: relative;
+}
+
 
 
