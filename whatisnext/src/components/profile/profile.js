@@ -27,8 +27,8 @@ class Profile extends Component {
     //rendering steps
     renderSteps = ({steps}) => {
         if(steps) {
-            return steps.map( (step) => {
-                return (<Step title={step.title.main} key={"step-" + step.index} status={(this.state.current === step.index) ? 'process' : (this.state.current > step.index) ? 'finish' : 'wait'} description={(this.state.current === step.index) ? 'onGoing' : (this.state.current > step.index) ? 'done' : 'wait'}/>)
+            return steps.map( (step, index) => {
+                return (<Step title={step.courseName} key={"step-" + index + 1} status={(this.state.current === (index)) ? 'process' : (this.state.current > (index)) ? 'finish' : 'wait'} description={(this.state.current === (index)) ? 'onGoing' : (this.state.current >(index)) ? 'done' : 'wait'}/>)
             })
         }
         
@@ -49,6 +49,7 @@ class Profile extends Component {
         
         return (
             <div className="profile-container">
+            {(this.props.all_user_data) ? 
                 <div className="profile-header">
                     <div className="bio-container">
                         <Row className="bio-row">
@@ -56,23 +57,36 @@ class Profile extends Component {
                                 <p className="bio">Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer Iam a developer</p>
                             </Col>
                         </Row>
+                        
                         <Row className="justify-content-between mt-5">
-                            <Col xs='auto'><p className="location">Egypt, Cairo</p></Col>
-                            <Col xs='auto'><div className="social-icons">
-                                <a href=' ' className='github'><GithubOutlined style={{ color: '#24292e', marginLeft: '10px' }} /></a>
-                                <a href=' ' className='linkedin'><LinkedinOutlined style={{ color: '#0073b1', marginLeft: '15px' }} /> </a>
-                                <a href=' ' className='twitter'><TwitterOutlined style={{ color: '#1da1f2', marginLeft: '10px' }} /></a>
-                            </div></Col>
+                            <Col xs='auto'><p className="location">{this.props.all_user_data.location}</p></Col>
+                            <Col xs='auto'>
+                            
+                                <div className="social-icons">
+                                    <a href={this.props.all_user_data.socialLinks} className='github'><GithubOutlined style={{ color: '#24292e', marginLeft: '10px' }} /></a>
+                                    <a href={this.props.all_user_data.socialLinks} className='linkedin'><LinkedinOutlined style={{ color: '#0073b1', marginLeft: '15px' }} /> </a>
+                                    <a href={this.props.all_user_data.socialLinks} className='twitter'><TwitterOutlined style={{ color: '#1da1f2', marginLeft: '10px' }} /></a>
+                                </div>
+
+                                
+                              
+                            
+                            </Col>
                         </Row>
+
+                                
                     </div>
 
                     <div className="profile-avatar-container">
-                        <Row className="justify-content-center"><h3>Noha M.</h3></Row>
+                        <Row className="justify-content-center"><h3>{this.props.all_user_data.firstName} {this.props.all_user_data.lastName}</h3></Row>
                         <Row className="justify-content-center"><img src={avatarPic} alt="avatar-img" className="rounded-circle avatar" /></Row>
                     </div>
 
                 </div>
+                : 
 
+                <Loading />
+                            }
                 <div className="profile-body">
                     <div className="user-current-progress">
                         <div className="current-progress">
@@ -124,19 +138,36 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        // console.log(this.props)
-        this.props.getRoadmap();//calling the action to get api data
-        this.props.getSamples();
+        
+       
+        // UpdateUserCareers
+        const selectedTrack = localStorage.getItem('selectedTrack');
+        const selectedCareer = localStorage.getItem('selectedCareer');
+        this.setState({'user_track': selectedTrack, 'user_career': selectedCareer});
+        this.props.getRoadmap(selectedCareer, selectedTrack);
+
+        const user_mail = localStorage.getItem("user_mail");
+        // this.props.updateUserData(this.state.allData);
+        this.props.getUserInfo(user_mail);
+        const curr = localStorage.getItem('current-user-step');
+        if(curr) {
+        
+          this.setState({'current': curr})
+
+        }
+        
     }   
 }
 
 const mapStateToProps = (state) => {
-    console.log('STATE', state.samples.samples);
+    console.log('STATE PROFILES', state);
     return {
-        users: state.users.user_data,
-        all_user_data: state.users.all_user_data,
+        // users: state.users.user_data,
+        all_user_data: state.users.all_user_info,
         steps: state.roadmap.steps,
-        samples: state.samples.samples
+
+        // steps: state.roadmap.steps,
+        // samples: state.samples.samples
     }
 }
 

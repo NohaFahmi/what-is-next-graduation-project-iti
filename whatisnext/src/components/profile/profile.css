@@ -23,8 +23,11 @@
     /* height: 200px; */
     margin: 20px auto;
     padding: 15px 10px;
-    box-shadow: 3px -3px 1px #3B6372;
+    /* box-shadow: 3px -3px 1px #3B6372; */
     border-radius: 10px;
+    color: black;
+    background-color: #dedbdb;
+
 
 }
 
@@ -54,7 +57,7 @@
 
 .location {
     font-size: 22px;
-    color: #5E5353;
+    color: black;
     font-weight: 500;
     padding-left: 5px;
 }
@@ -86,7 +89,7 @@
     padding: 10px;
     border: 1px solid whitesmoke;
     border-radius: 10px;
-    box-shadow: -3px 3px 1px #82BCBA;
+    box-shadow: 3px 3px 1px #82BCBA;
 }
 
 
@@ -162,7 +165,7 @@
     opacity: .8;
     background-color: black;
     height: 81%;
-    padding: 20px;
+    padding: 10px 10px 20px 10px;
     top:0;
     width: 100%;
     transition: all 0.3s ease-in-out;

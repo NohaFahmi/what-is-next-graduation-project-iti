@@ -11,9 +11,9 @@ class Tabs extends Component {
       <div>
         <BrowserRouter>
           <SecondNav />
-          <Route path="/resources" component={Resources} />
-          <Route path="/roadmap" component={Roadmap} />
-          <Route path="/community" component={Community} />
+          <Route path="/tabs/resources" component={Resources} />
+          <Route path="/tabs/roadmap" component={Roadmap} />
+          <Route path="/tabs/community" component={Community} />
         </BrowserRouter>
       </div>
     );

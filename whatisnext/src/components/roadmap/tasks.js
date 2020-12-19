@@ -19,27 +19,27 @@ const Tasks = (props) => {
         setBtn_pressed(e.target.id);
     }
 
-    const renderTaskDetails = (i, t) => {
-        if((btn_pressed === 'btn-' + i) && (visible_task_details === true)) { 
+    const renderTaskDetails = (id, task) => {
+        if((btn_pressed === 'btn-' + id) && (visible_task_details === true)) { 
             // console.log("Pressed", e.target.id);
 
             return(
-                <p className="visible">{t.description}</p>
+                <p className="visible">{task.description}</p>
             );
         }
     }
     const renderTasks = () => {
         if (tasks) {
             // console.log('visible_task_details',visible_task_details);
-            return tasks.map((task, index) => {
+            return tasks.map((t) => {
                 return (
-                    <div key={index+5}>
+                    <div key={t._id+5}>
                         <div className="task">
-                            <button type="button" className="task-btn" onClick={handleClick} id={`btn-${index}`}>
-                                {task.title}
+                            <button type="button" className="task-btn" onClick={handleClick} id={`btn-${t._id}`}>
+                                {t.taskName}
                             </button>
                             {/* -----toggle details----- */}
-                            {renderTaskDetails(index, task)}
+                            {renderTaskDetails(t._id, t)}
                         </div>
                     </div>
                 );

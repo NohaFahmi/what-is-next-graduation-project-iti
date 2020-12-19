@@ -1,5 +1,5 @@
 //routing
-import {BrowserRouter,Route} from 'react-router-dom'
+import {BrowserRouter,Route, Switch} from 'react-router-dom'
 import Signup from './containers/SignUp/signUp';
 import React, { Component } from 'react';
 //redux
@@ -11,17 +11,19 @@ import  promiseMiddleware  from 'redux-promise';
 import reducers from './reducers';
 
 //components
-import Footer from './components/Footer/footer.js';
 import Index from './components/Index';
-import Nav from './components/Navbar/navbar.js';
-import Resources from './components/resources/resource.js'
+import Navigation from './components/navbar/navbar';
+import Resources from './components/resources/resource'
 import SecondNav from './components/secondNav/second-nav'
-import Tabs from './components/tabs/tabs.js'
+import Tabs from './components/tabs/tabs'
 import Roadmap from './components/roadmap/roadmap';
-import Community from './components/community/community.js'
+import Community from './components/community/community'
 import Settings from './components/account-settings/setting';
 import Profile from './components/profile/profile';
 import CareerInformation from "./components/career-information/careerInformation";
+import Footer from './components/footer/footer';
+// import RedirectToSignup from './components/redirectToSignup';
+import { Redirect } from 'react-router-dom';
 
 //1. create store
 const createStoreWithMW = applyMiddleware(promiseMiddleware)(createStore);
@@ -34,23 +36,48 @@ class App extends Component {
     }
   }
   render() {
+
+    const LoginContainer = () => (
+      <div>
+        <Route path='/' render={() => {
+          <Redirect to='/signup' />
+        }} />
+        <Route path='/signup' component={Signup} />
+      </div>
+    )
+
+    // const DefaultContainer = () => (
+    //   <div>
+         
+    //   </div>
+              
+    // )
     return (
       <div>
            <Provider store={createStoreWithMW(reducers)}>
              <BrowserRouter>
-               <Nav/>
-               <Route exact path="/" component={Index}/>
-               <Route path="/signup" component={Signup}/>
-               <Route path="/resources" component={Resources}/>
-               <Route path="/nav2" component={SecondNav}/>
-               <Route path="/tabs" component={Tabs}/>
-               <Route path="/roadmap" component={Roadmap}/>
-               <Route path="/community" component={Community}/>
-               <Route path="/settings" component={Settings}/>
-               <Route path="/profile" component={Profile}/>
-               <Route exact path="/careerinformation" component={CareerInformation} />
+             <Navigation/>
 
-               <Footer/>
+              <Switch>
+                <Route exact path="/" component={Index}/>
+                <Route path="/signup" component={Signup}/>
+                {/* <Route component={RedirectToSignup} /> */}
+                <Route path="/tabs/resources" component={Resources}/>
+                <Route path="/nav2" component={SecondNav}/>
+                <Route path="/tabs" component={Tabs}/>
+                <Route path="/tabs/roadmap" component={Roadmap}/>
+                <Route path="/tabs/community" component={Community}/>
+                <Route path="/settings" component={Settings}/>
+                <Route path="/profile" component={Profile}/>
+                <Route exact path='/(signup)' component={LoginContainer} />
+
+                <Route exact path="/careerinformation/:career" component={CareerInformation} />
+               
+
+                {/* <Route component={DefaultContainer} /> */}
+              </Switch>
+              <Footer/>
+               
              </BrowserRouter>  
            </Provider>
       </div>

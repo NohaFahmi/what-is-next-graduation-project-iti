@@ -1,7 +1,7 @@
 import './roadmap.css';
 import React, { Component } from 'react';
 import { Divider, Progress } from 'antd'
-import { CaretRightOutlined } from '@ant-design/icons';
+import { CaretRightOutlined, TrophyOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import *as actions from '../../actions';
 import { createFromIconfontCN } from '@ant-design/icons';
@@ -22,6 +22,8 @@ class Roadmap extends Component {
         super();
         this.state = {
             checked_btn: "",//store the checked step id 
+            user_track: '',
+            user_career: '',
             disabled: true,
             checked: false, //for disable all steps before starting
             visible_task: false, //to check task is visible
@@ -47,9 +49,11 @@ class Roadmap extends Component {
             this.next(); //increase the current value
             this.increase(this.props); //increase the main progress
             // console.log("next");
-
         } else {
             this.prev(); // decrease the current value
+            this.decrease(this.props); //increase the main progress
+
+
             // console.log("prev");
         }
         //how to keep this element marked as done???????
@@ -61,6 +65,8 @@ class Roadmap extends Component {
             }
         }) */
     }
+
+    
     /**-------------------------------------------------- */
     next = () => {
         this.setState({ current: this.state.current + 1 })
@@ -74,12 +80,16 @@ class Roadmap extends Component {
         console.log("CURRENT", this.state.current)
         this.setState({ percent: Math.floor((((this.state.current + 1) * 100) / steps.length)) })
     }
+    decrease = ({ steps }) => {
+        console.log("CURRENT", this.state.current)
+        this.setState({ percent: Math.floor((((this.state.current - 1) * 100) / steps.length)) })
+    }
 
     /**-------------------------------------------------- */
 
     //function handling the start button
     handleStart = (e) => {
-        // console.log("Started!");
+        console.log("Started!");
         this.setState({ disabled: false });//enable all checkboxes
     }
     //function handling displaying the main progress circe after start btn pressed
@@ -87,18 +97,31 @@ class Roadmap extends Component {
 
         return (<Progress type="circle" percent={this.state.percent} strokeColor={'#1FB46B'} strokeWidth={12} />)
     }
+    handleSave = () => {
+        if((this.state.current !== 0) && (this.state.percent !== 0)) {
+            console.log('saved!');
+            localStorage.setItem("current-user-step", this.state.current);
+            localStorage.setItem("current-percent", this.state.percent);
+            localStorage.setItem('checked_btn', this.state.checked_btn);
 
+        } else {    
+            console.log("Nothing to save!")
+
+        }
+            
+
+    }
     //render all the steps number on the left and the track steps coming from database
     renderStepsWrapper = ({ steps }) => {
 
         if (steps) {
             return steps.map((step, index) => {
                 return (
-                    <div key={`main-${step.id}`}>
+                    <div key={`main-${step._id}`}>
                         <div className="step-wrapper">
-                            {(this.state.disabled)? <div className='step-num undone'><span>{step.index}</span></div>
+                            {(this.state.disabled)? <div className='step-num undone'><span>{steps.indexOf(step) + 1}</span></div>
                              : 
-                            ((this.state.visible_task) && (this.state.checked_btn === 'check-' + step.id) && (this.state.checked)) ? <div className='step-num current'><span><IconFont type='icon-currentlocation' /></span></div> : <div className='step-num done'><span>{step.index}</span></div>
+                            ((this.state.visible_task) && (this.state.checked_btn === 'check-' + step._id) && (this.state.checked)) ? <div className='step-num current'><span><IconFont type='icon-currentlocation' /></span></div> : <div className='step-num done'><span>{steps.indexOf(step) + 1}</span></div>
                             }
 
                             {/* {(this.state.disabled) ?
@@ -112,19 +135,19 @@ class Roadmap extends Component {
                              */}
                             <div className='step-details'>
                                 <div className="details">
-                                    <h6 className="main">{step.title.main}</h6>
-                                    <p className="sub">{step.title.sub}</p>
-                                    <p className="time">Estimated Time: {step.time}</p>
+                                    <h6 className="main">{step.courseName}</h6>
+                                    {/* <p className="sub">{step.title.sub}</p> */}
+                                    <p className="time">Estimated Time: {step.estimatedTime}</p>
                                 </div>
                                 <div className='icon'>
                                     <label htmlFor={`check-${step.id}`}>mark as Completed</label>
-                                    <input type="checkbox" onChange={(e) => this.handleMarkedCompleted(e, step)} id={`check-${step.id}`} className="check-box" disabled={this.state.disabled} />
+                                    <input type="checkbox" onChange={(e) => this.handleMarkedCompleted(e, step)} id={`check-${step._id}`} className="check-box" disabled={this.state.disabled} />
 
                                 </div>
                             </div>
 
                             {/* -------toggle tasks ------*/}
-                            {(this.state.visible_task && (step.tasks.length > 0) && (this.state.checked_btn === 'check-' + step.id)) && <Tasks tasks={step.tasks} id={step.id} state={this.state} />}
+                            {(this.state.visible_task && (step.task.length > 0) && (this.state.checked_btn === 'check-' + step._id)) && <Tasks tasks={step.task} id={step._id} state={this.state} />}
 
                         </div>
                         {(index === (steps.length -1)) ? " " : <Divider type="vertical" className="line" orientation='left' />}
@@ -146,6 +169,8 @@ class Roadmap extends Component {
 
                         {((!this.state.disabled)) ? this.renderCircularProgress() : ''}
 
+                        <button className='save' onClick={this.handleSave}>Save Progress</button>
+
                     </div>
                 </div>
                 <div className='step-container'>
@@ -166,18 +191,37 @@ class Roadmap extends Component {
         // console.log(this.state.checked);
         // console.log('PROPS', this.props);
         //get all steps from API
-        this.props.getRoadmap();//calling the action to get api data
         // this.handleMarkedCompleted()
         // console.log("DONE",this.state.done)
         // console.log("selected",this.state.selected)
+        const selectedTrack = localStorage.getItem('selectedTrack');
+        const selectedCareer = localStorage.getItem('selectedCareer');
+        this.setState({'user_track': selectedTrack, 'user_career': selectedCareer});
+        this.props.getRoadmap(selectedCareer, selectedTrack);//calling the action to get api data
+       
+        const curr = localStorage.getItem('current-user-step')
+        const per = localStorage.getItem('current-percent')
+        if(curr && per) {
+            this.setState({'current': curr, 'percent': per})
+            const disabled = (curr > 0) ? false : true
 
+            this.setState({'disabled': disabled})
+        }
+        
+        // this.setState({'current': curr, 'percent': per})
+        // this.setState({'percent': localStorage.getItem('current-percent')})
 
+        
+        console.log(selectedTrack)
     }
+
+    
 
 }
 
 const mapStateToProps = (state) => {
-    // console.log('STATE', state.current);
+    // console.log('STATE ROADMAP', state.roadmap.steps);
+
     return {
         steps: state.roadmap.steps,
     }

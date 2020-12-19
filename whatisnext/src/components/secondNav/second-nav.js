@@ -14,17 +14,17 @@ const SecondNav = () => {
       <div className="tabs">
         <Row style={{ margin: "0" }}>
           <Col style={{ border: "2px solid white" }} lg={4}>
-            <Link to="/roadmap" style={{ color: "white" }}>
+            <Link to="/tabs/roadmap" style={{ color: "white" }}>
               Roadmap
             </Link>
           </Col>
           <Col style={{ border: "2px solid white" }} lg={4}>
-            <Link to="/resources" style={{ color: "white" }}>
+            <Link to="/tabs/resources" style={{ color: "white" }}>
               Resources
             </Link>
           </Col>
           <Col style={{ border: "2px solid white" }} lg={4}>
-            <Link to="/community" style={{ color: "white" }}>Community</Link>
+            <Link to="/tabs/community" style={{ color: "white" }}>Community</Link>
           </Col>
         </Row>
       </div>

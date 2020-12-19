@@ -9,8 +9,9 @@
     border-radius: 10px;
     /* width: 300px; */
     padding: 10px;
-    background-color: black;
-    color: whitesmoke;
+    background-color: #dedbdb;
+    border-color: #dedbdb;
+    color: black;
 }
 
 .sidebar {
@@ -26,7 +27,7 @@
     width: 120px;
     height: 40px;
     border-radius: 5px;
-    background-color: black;
+    /* background-color: black; */
     color: white;
     outline: none;
     font-size: 18px;
@@ -35,10 +36,27 @@
 }
 
 .log-out-btn:hover {
-    background-color: whitesmoke;
-    color: black
+    background-color: white;
+    color: black;
 }
 
+.rst-btn {
+    color: #fff;
+    background-color: #1981A7;
+    border-color: #1981A7;
+}
+
+.rst-btn:hover {
+    background-color: white;
+    border-color: #1981A7;
+    color: #1981A7;
+}
+
+.rst-btn:disabled {
+    background-color: lightgray;
+    border-color: lightgray;
+    color: #1981A7;
+}
 .settings-avatar {
     width: 150px;
     height: 150px;
@@ -54,4 +72,10 @@
 
 h5 {
     margin: 20px 0;
+}
+
+.editting {
+    width: 40px;
+    border-radius: 10px;
+    background-color: white;
 }

@@ -10,17 +10,54 @@ import {
 } from "@ant-design/icons";
 import avatar from "../../assets/l60Hf.png";
 import image from '../../assets/career-cover.jpg'
+import { Steps } from 'antd';
+import Loading from './../loading/loading';
+import { connect } from 'react-redux';
+import * as actions from '../../actions'
+
+const { Step } = Steps;
 
 class Community extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+        current: 0,
+  }
+
+  }
+
+
+  renderSteps = ({steps}) => {
+    if(steps) {
+        return steps.map( (step, index) => {
+            return (<Step title={step.courseName} key={"step-" + index + 1} status={(this.state.current === (index)) ? 'process' : (this.state.current > (index)) ? 'finish' : 'wait'} description={(this.state.current === (index)) ? 'onGoing' : (this.state.current >(index)) ? 'done' : 'wait'}/>)
+        })
+    }
+    
+    return <Loading />
+}
   render() {
     return (
       <Container>
         <div className="comm-container">
           <Row>
             <Col lg={3}>
-              <div className="progress-card"></div>
+              {/* <div className="progress-card"> */}
+              <div className="user-current-progress">
+                        <div className="current-progress">
+                            <h5>Your Progress</h5>
+                            <Steps current={this.state.current} onChange={this.onChange} direction="vertical">
+                                
+                                {this.renderSteps(this.props)}
+                            </Steps>
+                        </div>
+
+                    </div>
+              {/* </div> */}
             </Col>
-            <Col lg={5}>
+            <Col lg={5} style={{paddingTop: '20px'}}>
               <div className="what-new">
                 <p>What's in your mind?</p>
 
@@ -103,7 +140,7 @@ class Community extends Component {
               </div>
               {/* END OF NEWS TEXT */}
             </Col>
-            <Col lg={3}>
+            <Col lg={3} style={{paddingTop: '20px'}}>
               <div className="tags">
                 {/* <a>#HTML#CSS#JAVASCRIPT</a> */}
                 <div>
@@ -120,6 +157,34 @@ class Community extends Component {
       </Container>
     );
   }
+
+  componentDidMount() {
+    // console.log(this.props)
+    const selectedTrack = localStorage.getItem('selectedTrack');
+        const selectedCareer = localStorage.getItem('selectedCareer');
+        this.setState({'user_track': selectedTrack, 'user_career': selectedCareer});
+
+        this.props.getRoadmap(selectedCareer, selectedTrack);
+        const curr = localStorage.getItem('current-user-step');
+        if(curr) {
+        
+          this.setState({'current': curr})
+
+        }
+
+    // this.props.getRoadmap();//calling the action to get api data
+    // this.props.getSamples();
+} 
 }
 
-export default Community;
+const mapStateToProps = (state) => {
+  // console.log('STATE', state.samples.samples);
+  return {
+      // users: state.users.user_data,
+      // all_user_data: state.users.all_user_data,
+      steps: state.roadmap.steps,
+      // samples: state.samples.samples
+  }
+}
+
+export default connect(mapStateToProps, actions)(Community);

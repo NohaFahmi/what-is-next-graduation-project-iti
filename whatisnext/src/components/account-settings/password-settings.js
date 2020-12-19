@@ -20,7 +20,7 @@ class PasswordSettings extends Component {
     checkOld = (e) => {
         
         this.setState({current_pass: e.target.value});
-        if(this.props.old_password[0].password === e.target.value) {
+        if(this.props.old_passwordpassword === e.target.value) {
             this.setState({new_pass_disabled: false, valid: true})
         } else {
             this.setState({new_pass_disabled: true, valid: false})
@@ -62,7 +62,7 @@ class PasswordSettings extends Component {
                                     </Form.Row>
                                     <Form.Row className="mt-4">
                                         <Col xs={4}>
-                                            <input placeholder="New Password" className="form-control" disabled={this.state.new_pass_disabled} onChange={this.handleChangePassword} id="pass" name="new-password" />
+                                            <input placeholder="New Password" className="form-control" disabled={this.state.new_pass_disabled} onChange={this.handleChangePassword} id="pass"  name='password' />
 
                                         </Col>
                                     </Form.Row>
@@ -74,10 +74,10 @@ class PasswordSettings extends Component {
                                     </Form.Row>
                                     <Form.Row className='mt-5 justify-content-start'>
                                         <Col xs='auto'>
-                                            <Button type="submit" disabled={this.state.save_disabled}>Save Changes</Button>
+                                            <Button type="submit" disabled={this.state.save_disabled} className="rst-btn">Save Changes</Button>
                                         </Col>
                                         <Col xs='auto'>
-                                            <Button type="reset">Reset</Button>
+                                            <Button type="reset" className="rst-btn">Reset</Button>
                                         </Col>
                                     </Form.Row>
                                 </form>

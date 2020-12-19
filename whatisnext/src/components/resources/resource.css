@@ -10,7 +10,10 @@
 .ant-card-body {
     padding: 1% 0 7% 1%;
 }
-
+.ant-card-bordered {
+    box-shadow: 3px 3px 1px #2d6066 !important;
+    border-radius: 5px;
+}
 .res-card h6 {
     color: #1912DF;
 }
@@ -24,7 +27,7 @@
     padding: 9% 0 0 2%; 
 }
 
-.res-details button {
+.res-details .button {
     width: 20%;
     float: right;
     margin-right: 3%;
@@ -34,6 +37,7 @@
     background-color: #e07367;
     color: #fff;
     margin-top: -3%;
+    padding: 5px;
 }
 
 .res-details a:nth-child(1){

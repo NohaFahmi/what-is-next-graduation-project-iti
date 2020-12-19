@@ -13,7 +13,7 @@ const Stepper = (props) => {
         if (steps) {
             return steps.map((step) => {
                 return (
-                    <Step description='' className="stepper" key={"stepper" + step.index} />
+                    <Step description='' className="stepper" key={"stepper" + step._id} />
                 );
             })
         }

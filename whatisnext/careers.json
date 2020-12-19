@@ -1,0 +1,273 @@
+{
+    "careers": [
+        {
+          "careerName": "Software Development",
+          "Software Development": [
+            {
+              "track": [
+                {
+                  "trackName": "BackEnd",
+                  "trackImage": "https://cdn.pixabay.com/photo/2019/09/22/16/20/backend-4496461_960_720.png",
+                  "course": [
+                    {
+                      "courseName": "Java",
+                      "courseImage": "    ",
+                      "estimatedTime": " 8 weeks",
+                      "task": [
+                        {
+                          "taskName": "blah blah blah",
+                          "taskImage": "    ",
+                          "description": "blah blah blah"
+                        }
+                      ],
+                      "resource": [
+                        {
+                          "resourceName": "Coursera",
+                          "link": "www.coursera.com",
+                          "price": "500$",
+                          "estimatedTime": "2 weeks",
+                          "resourceImage": "    "
+                        }
+                      ]
+                    },
+                    {
+                      "courseName": "SpringBoot",
+                      "courseImage": "    ",
+                      "estimatedTime": " 4 weeks",
+                      "task": [
+                        {
+                          "taskName": "blah blah blah",
+                          "taskImage": "    ",
+                          "description": "blah blah blah"
+                        }
+                      ],
+                      "resource": [
+                        {
+                          "resourceName": "Udemy",
+                          "link": "www.udemy.com",
+                          "price": "800$",
+                          "estimatedTime": "8 weeks",
+                          "resourceImage": "    "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                    "trackName": "Frontend",
+                    "trackImage": "https://cdn.pixabay.com/photo/2019/09/22/16/20/backend-4496461_960_720.png",
+                    "course": [
+                      {
+                        "courseName": "Java",
+                        "courseImage": "    ",
+                        "estimatedTime": " 8 weeks",
+                        "task": [
+                          {
+                            "taskName": "blah blah blah",
+                            "taskImage": "    ",
+                            "description": "blah blah blah"
+                          }
+                        ],
+                        "resource": [
+                          {
+                            "resourceName": "Coursera",
+                            "link": "www.coursera.com",
+                            "price": "500$",
+                            "estimatedTime": "2 weeks",
+                            "resourceImage": "    "
+                          }
+                        ]
+                      },
+                      {
+                        "courseName": "SpringBoot",
+                        "courseImage": "    ",
+                        "estimatedTime": " 4 weeks",
+                        "task": [
+                          {
+                            "taskName": "blah blah blah",
+                            "taskImage": "    ",
+                            "description": "blah blah blah"
+                          }
+                        ],
+                        "resource": [
+                          {
+                            "resourceName": "Udemy",
+                            "link": "www.udemy.com",
+                            "price": "800$",
+                            "estimatedTime": "8 weeks",
+                            "resourceImage": "    "
+                          }
+                        ]
+                      }
+                    ]
+                },
+                {
+                    "trackName": "Mobile Development",
+                    "trackImage": "https://cdn.pixabay.com/photo/2015/05/28/14/38/ux-787980_960_720.jpg",
+                    "course": [
+                      {
+                        "courseName": "Java",
+                        "courseImage": "    ",
+                        "estimatedTime": " 8 weeks",
+                        "task": [
+                          {
+                            "taskName": "blah blah blah",
+                            "taskImage": "    ",
+                            "description": "blah blah blah"
+                          }
+                        ],
+                        "resource": [
+                          {
+                            "resourceName": "Coursera",
+                            "link": "www.coursera.com",
+                            "price": "500$",
+                            "estimatedTime": "2 weeks",
+                            "resourceImage": "    "
+                          }
+                        ]
+                      },
+                      {
+                        "courseName": "SpringBoot",
+                        "courseImage": "    ",
+                        "estimatedTime": " 4 weeks",
+                        "task": [
+                          {
+                            "taskName": "blah blah blah",
+                            "taskImage": "    ",
+                            "description": "blah blah blah"
+                          }
+                        ],
+                        "resource": [
+                          {
+                            "resourceName": "Udemy",
+                            "link": "www.udemy.com",
+                            "price": "800$",
+                            "estimatedTime": "8 weeks",
+                            "resourceImage": "    "
+                          }
+                        ]
+                      }
+                    ]
+                }
+              ]
+            }
+          ]
+        },
+    
+        {
+          "careerName": "Engineering",
+          "Engineering": [
+            {
+              "track": [
+                {
+                  "trackName": "BackEnd",
+                  "trackImage": "    ",
+                  "course": [
+                    {
+                      "courseName": "Java",
+                      "courseImage": "    ",
+                      "estimatedTime": " 8 weeks",
+                      "task": [
+                        {
+                          "taskName": "blah blah blah",
+                          "taskImage": "    ",
+                          "description": "blah blah blah"
+                        }
+                      ],
+                      "resource": [
+                        {
+                          "resourceName": "Coursera",
+                          "link": "www.coursera.com",
+                          "price": "500$",
+                          "estimatedTime": "2 weeks",
+                          "resourceImage": "    "
+                        }
+                      ]
+                    },
+                    {
+                      "courseName": "SpringBoot",
+                      "courseImage": "    ",
+                      "estimatedTime": " 4 weeks",
+                      "task": [
+                        {
+                          "taskName": "blah blah blah",
+                          "taskImage": "    ",
+                          "description": "blah blah blah"
+                        }
+                      ],
+                      "resource": [
+                        {
+                          "resourceName": "Udemy",
+                          "link": "www.udemy.com",
+                          "price": "800$",
+                          "estimatedTime": "8 weeks",
+                          "resourceImage": "    "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+    
+        {
+          "careerName": "HardWare",
+          "HardWare": [
+            {
+              "track": [
+                {
+                  "trackName": "BackEnd",
+                  "trackImage": "    ",
+                  "course": [
+                    {
+                      "courseName": "Java",
+                      "courseImage": "    ",
+                      "estimatedTime": " 8 weeks",
+                      "task": [
+                        {
+                          "taskName": "blah blah blah",
+                          "taskImage": "    ",
+                          "description": "blah blah blah"
+                        }
+                      ],
+                      "resource": [
+                        {
+                          "resourceName": "Coursera",
+                          "link": "www.coursera.com",
+                          "price": "500$",
+                          "estimatedTime": "2 weeks",
+                          "resourceImage": "    "
+                        }
+                      ]
+                    },
+                    {
+                      "courseName": "SpringBoot",
+                      "courseImage": "    ",
+                      "estimatedTime": " 4 weeks",
+                      "task": [
+                        {
+                          "taskName": "blah blah blah",
+                          "taskImage": "    ",
+                          "description": "blah blah blah"
+                        }
+                      ],
+                      "resource": [
+                        {
+                          "resourceName": "Udemy",
+                          "link": "www.udemy.com",
+                          "price": "800$",
+                          "estimatedTime": "8 weeks",
+                          "resourceImage": "    "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+}

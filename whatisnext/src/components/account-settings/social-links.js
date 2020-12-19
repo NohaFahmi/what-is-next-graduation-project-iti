@@ -54,10 +54,10 @@ class SocialLinks extends Component {
                     </Form.Row>
                     <Form.Row className='mt-5 justify-content-start'>
                         <Col xs='auto'>
-                            <Button type="submit" disabled={this.state.save_disabled}>Save Changes</Button>
+                            <Button type="submit" disabled={this.state.save_disabled} className="rst-btn">Save Changes</Button>
                         </Col>
                         <Col xs='auto'>
-                            <Button type="reset">Reset</Button>
+                            <Button type="reset" className="rst-btn">Reset</Button>
                         </Col>
                     </Form.Row>
                 </form>

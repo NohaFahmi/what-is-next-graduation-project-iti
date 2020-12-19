@@ -10,42 +10,43 @@
     
 }
 
-.welcome-container.text-side h1 {
+.text-side h2 {
     display: block;
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
 }
-.welcome-container.text-side h2 {
-    font-size: 2rem;
+.text-side h3 {
+    /* font-size: 2rem; */
     margin: 30px 0;
 }
 
-.welcome-container.text-side {
+.text-side {
     /* width: 60%; */
-    margin-top: 50px;
+    margin-top: 10px;
     flex: 1;
     padding-right: 30px;
 }
-.welcome-container.img-side img{
+.img-side img{
     width: 100%;  
 }
-.welcome-container.img-side {
+.img-side {
     /* width: 80%; */
     /* min-width: 50%; */
     /* height: 500px; */
     flex: 2;
     
 }
-.welcome-container .dropdowns {
+.dropdowns {
     display: flex;
     /* flex-direction: column; */
-    margin-top: 100px;
-    /* align-items: flex-start; */
+    margin-top: 50px;
+    align-items: flex-start;
+    /* border: 1px solid black */
 }
 
 .drop-career, .drop-tracks {
    width: 150px;
-   height: 55px;
-   font-size: 24px;
+   height: 48px;
+   /* font-size: 24px; */
    font-weight: 500;
 }
 .drop-career {
@@ -54,12 +55,26 @@
 }
 
 .go-btn {
-    width: 120px;
-    height: 55px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    width: 90px;
+    /* height: 48px; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     background-color: #E07367;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
     color: white;
+}
+
+.go-btn:hover {
+    border-color: #E07367;
+    background-color: white;
+    color: #E07367;
+
+}
+
+.go-btn:focus {
+    border-color: #E07367;
+    background-color: white;
+    color: #E07367;
+
 }
