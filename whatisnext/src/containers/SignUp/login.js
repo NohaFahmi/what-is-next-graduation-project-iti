@@ -36,7 +36,15 @@ class Login extends Component {
         e.preventDefault();
           console.log('SignedIn!', this.state.loginData);
           this.props.getUserData(this.state.loginData);
-          this.props.history.push('/');
+          const careerSelected =  localStorage.getItem('selectedCareer')
+          const tracksSelected = localStorage.getItem('selectedTrack')
+          if(careerSelected && tracksSelected) {
+            this.props.history.push('/tabs/roadmap');
+          } else {
+          
+            this.props.history.push('/');
+
+          }
     }
     render() {
         return (
@@ -47,9 +55,9 @@ class Login extends Component {
                 <p>Welcome Back</p>
               </div>
               <div className="signUp-form">
-                <input type="text" placeholder="Email Address" onChange={this.handleOnChangeLogin} name="mail"/>
+                <input type="email" placeholder="Email Address" onChange={this.handleOnChangeLogin} name="mail"/>
 
-                <input type="text" placeholder="Password" onChange={this.handleOnChangeLogin} name="password" />
+                <input type="password" placeholder="Password" onChange={this.handleOnChangeLogin} name="password" />
 
               </div>
               <div className="signIn-text">

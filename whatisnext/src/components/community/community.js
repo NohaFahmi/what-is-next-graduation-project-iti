@@ -171,6 +171,8 @@ class Community extends Component {
           this.setState({'current': curr})
 
         }
+        document.querySelector('#first-navbar').style.display = 'block'
+  
 
     // this.props.getRoadmap();//calling the action to get api data
     // this.props.getSamples();

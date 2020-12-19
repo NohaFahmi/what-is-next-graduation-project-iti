@@ -212,6 +212,7 @@ class Roadmap extends Component {
 
             this.setState({'disabled': disabled})
         }
+        document.querySelector('#first-navbar').style.display = 'block'
         
         // this.setState({'current': curr, 'percent': per})
         // this.setState({'percent': localStorage.getItem('current-percent')})

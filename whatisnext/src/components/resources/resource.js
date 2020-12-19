@@ -71,7 +71,9 @@ class Resources extends Component {
 
         this.props.getRoadmap(selectedCareer, selectedTrack);
         // this.getResources(this.props);
+        document.querySelector('#first-navbar').style.display = 'block'
     }
+
 }
 
 const mapStateToProps = (state) => {

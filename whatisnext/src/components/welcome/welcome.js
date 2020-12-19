@@ -61,7 +61,7 @@ class WelcomeSection extends Component {
     }
     handleClick = (e) => {
 
-        if(this.state.profile) {
+        
             if((this.state.tracksSelected !== undefined )&& (this.state.careerSelected !== undefined)) {
                 localStorage.setItem('selectedCareer', this.state.careerSelected);
                 localStorage.setItem('selectedTrack', this.state.tracksSelected);
@@ -71,14 +71,15 @@ class WelcomeSection extends Component {
                         {id: this.state.user_id, step:0}
                     ]
                 }
+                if(this.state.profile) {
                 this.props.UpdateUserCareers(this.state.career_id,info)
                 this.redirectToTarget();
-            }
-        } else {
+                } else {
         
-            this.props.history.push('/signup')
-
-        }
+                    this.props.history.push('/signup')
+        
+                }
+        } 
         
     }
     renderCareers = ({careersList}) => {

@@ -59,7 +59,7 @@ class App extends Component {
              <BrowserRouter>
              
 
-             {(this.state.isNavBarHidden) ? null : <Navigation/>}
+             <Navigation/>
 
               <Switch>
                 <Route exact path="/" component={Index}/>
