@@ -68,14 +68,14 @@ We Hope you enjoy your time with What is Next website...
 * Run the Server
     * open the terminal in the following path `C:\Program Files\MongoDB\Server\4.4\bin`, and run the command `mongod`.
 
-    * open the terminal into the whatIsNextProject file and run the command `npm i`
+    * open the terminal into the "backend_API" file and run the command `npm i`
 
     * run the command `node ./bin/www`, the terminal will show 'connected to db' and the backend will run on the: <http://localhost:3000/>
 
         * you can view full Backend APIs docs [here]()
 ---
 * Run the react app project
-    * open terminal into whatisnext folder and run command `npm i`.
+    * open terminal into "whatisnext" folder and run command `npm i`.
 
     * run command `npm start`
 
