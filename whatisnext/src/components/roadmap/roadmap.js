@@ -1,12 +1,11 @@
 import './roadmap.css';
 import React, { Component } from 'react';
 import { Divider, Progress } from 'antd'
-import { CaretRightOutlined, TrophyOutlined } from '@ant-design/icons';
+import { CaretRightOutlined} from '@ant-design/icons';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { createFromIconfontCN } from '@ant-design/icons';
 //components
-import Stepper from './stepper';
 import Loading from '../loading/loading';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
@@ -173,7 +172,7 @@ class Roadmap extends Component {
             })
         }
 
-        // return <Loading />
+        return <Loading />
     }
     render() {
         if (localStorage.getItem('auth_token')) {

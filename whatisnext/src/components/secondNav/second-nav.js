@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./second-nav.css";
 import { Col, Row } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from '../../actions'
 import Loading from './../loading/loading';

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
-import {DatePicker, Input } from 'antd';
+import {DatePicker} from 'antd';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { connect } from 'react-redux';
 import * as actions from '../../actions'

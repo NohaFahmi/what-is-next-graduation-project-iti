@@ -1,8 +1,6 @@
 import './welcome.css';
 import onlineCourses from '../../assets/online-courses-illustration.jpg';
-import { Divider, Menu, Select, Button, Alert} from 'antd';
-// import { Dropdown, DropdownButton, ButtonGroup , Button} from 'react-bootstrap'
-import { CaretDownOutlined } from '@ant-design/icons'
+import { Select, Button} from 'antd';
 import { Component } from 'react'
 import { connect } from 'react-redux';
 import * as actions from '../../actions'
@@ -18,7 +16,6 @@ class Welcome extends Component {
             disable: true,
             careerSelected: "",
             trackSelected: "",
-            career_id: "",
             // redirect: "/roadmap"
             user_id: "",
             user: "",

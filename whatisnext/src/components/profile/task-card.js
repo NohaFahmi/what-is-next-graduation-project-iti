@@ -1,4 +1,3 @@
-import { Divider } from 'antd';
 import task1 from '../../assets/tasks/task-1.webp';
 
 import { DeleteOutlined, LinkOutlined, EditOutlined } from '@ant-design/icons';

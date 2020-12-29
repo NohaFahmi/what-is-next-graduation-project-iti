@@ -3,18 +3,13 @@ import { Component } from 'react';
 import { Tabs} from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
 import * as actions from '../../actions';
-import { Button } from 'react-bootstrap';
-// import userAvatar from '../../assets/user.svg';
-
-
 import { SettingOutlined, LockOutlined, InfoCircleOutlined, LogoutOutlined} from '@ant-design/icons'
 import GeneralSettings from './general-settings';
 import Info from './info';
 import SocialLinks from './social-links';
 import PasswordSettings from './password-settings';
 import { connect } from 'react-redux';
-import Loading from './../loading/loading';
-import { Link, Redirect, withRouter } from 'react-router-dom';
+import {withRouter } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 const IconFont = createFromIconfontCN({

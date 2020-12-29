@@ -3,11 +3,9 @@ import './resources.css';
 import { Container } from 'react-bootstrap';
 import { Card } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons'
-import SecondNav from '../secondNav/second-nav.js'
-// import Loading from './../loading/loading';
+import Loading from './../loading/loading';
 import { connect } from 'react-redux';
 import * as actions from '../../actions'
-// import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 class Resources extends Component {
@@ -37,7 +35,7 @@ class Resources extends Component {
                                 <hr />
                                 <div className="res-details">
                                     <a href=' '>{res.estimatedTime}</a> <a href=' '>{res.price}</a>
-                                    <a href={res.link} target="_blank" className='button'>Start <ArrowRightOutlined /></a>
+                                    <a href={res.link} target="_blank" rel='noreferrer' className='button'>Start <ArrowRightOutlined /></a>
                                 </div>
                             </Card>
                         </div>
@@ -46,6 +44,7 @@ class Resources extends Component {
             })
 
         }
+        return <Loading />
 
         //     
         // })

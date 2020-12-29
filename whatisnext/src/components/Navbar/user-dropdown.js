@@ -1,5 +1,3 @@
-import profilePic from '../../assets/blank-profile.png'
-
 
 const UserDropdown = ({ click }) => {
 

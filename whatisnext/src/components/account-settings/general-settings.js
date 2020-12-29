@@ -2,9 +2,6 @@
 import React, { Component } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import { Divider } from 'antd';
-import userAvatar from '../../assets/user.svg';
-import { EditOutlined } from '@ant-design/icons'
-import Files, { ImageCropper } from "react-butterfiles";
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 

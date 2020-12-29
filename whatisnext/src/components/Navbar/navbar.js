@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap'
+import { Nav, Navbar, Form, FormControl} from 'react-bootstrap'
 import UserDropdown from './user-dropdown';
 
 //actions
