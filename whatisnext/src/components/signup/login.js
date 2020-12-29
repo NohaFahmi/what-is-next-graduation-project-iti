@@ -53,7 +53,7 @@ class Login extends Component {
             <b>Find your learning path and start your journey</b>
           </p>
         </div>
-            <form onSubmit={this.handleSignIn} >
+            <form onSubmit={this.handleSignIn} style={{width: '400px'}}>
               <div className="signUp">
                 <p>Sign in</p>
                 <p>Welcome Back</p>
