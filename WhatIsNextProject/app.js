@@ -5,6 +5,7 @@ require('dotenv').config();
 
 var logger = require('morgan');
 const cors = require('cors');
+const path = require('path')
 const mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,7 +17,10 @@ const userCareerRouter=require('./routes/userCareer');
 var app = express();
 
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 app.use(logger('dev'));
 mongoose.connect('mongodb+srv://manaryehia:01223490467@cluster0.744sj.mongodb.net/WhatIsNext?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology:true },(err)=>{
@@ -31,11 +35,11 @@ mongoose.connect('mongodb+srv://manaryehia:01223490467@cluster0.744sj.mongodb.ne
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/admin', adminRouter);
-app.use('/career', careerRouter);
-app.use('/userCareer',userCareerRouter);
+app.use('/api/', indexRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/career', careerRouter);
+app.use('/api/userCareer',userCareerRouter);
 
 
 

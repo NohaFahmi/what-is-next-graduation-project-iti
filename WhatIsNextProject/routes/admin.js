@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 const Admin = require('../models/Admin')
-router.post('/signup', (req, res, next) => {
+router.post('/api/signup', (req, res, next) => {
   Admin.find({ mail: req.body.mail }).then(result => {
     if (result.length < 1) {
       bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -48,7 +48,7 @@ router.post('/signup', (req, res, next) => {
 
 
 })
-router.get('/signin',(req,res,next)=>{
+router.get('/api/signin',(req,res,next)=>{
    Admin.find({mail :req.body.mail}).then(
      admin=>{
        if(admin.length>=1){
@@ -81,7 +81,7 @@ router.get('/signin',(req,res,next)=>{
 })
 })
 
-router.patch('/updateadmin/:id',(req,res,next)=>{
+router.patch('/api/updateadmin/:id',(req,res,next)=>{
   bcrypt.hash(req.body.password,10).then(hash=>{
    const newadmin={
      firstName :req.body.firstName,
@@ -117,7 +117,7 @@ router.patch('/updateadmin/:id',(req,res,next)=>{
   })
 
 })
-router.delete('/deleteadmin/:id',(req,res,next)=>{
+router.delete('/api/deleteadmin/:id',(req,res,next)=>{
   Admin.findOneAndDelete({_id:req.params.id}).then(result=>{
     if(result==null){
       res.status(404).json({

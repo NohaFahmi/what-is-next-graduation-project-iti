@@ -12,7 +12,7 @@ function generateAccessToken(_id) {
   // expires after half and hour (1800 seconds = 30 minutes)
   return jwt.sign(_id, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
 }
-router.post('/signup', (req, res, next) => {
+router.post('/api/signup', (req, res, next) => {
   User.find({ mail: req.body.mail }).then(result => {
     if (result.length < 1) {
       bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -61,7 +61,7 @@ router.post('/signup', (req, res, next) => {
 
 
 })
-router.post('/signin',(req,res,next)=>{
+router.post('/api/signin',(req,res,next)=>{
    User.find({mail :req.body.mail}).then(
      
      user=>{
@@ -103,7 +103,7 @@ router.post('/signin',(req,res,next)=>{
     })
 })
 })
-router.get('/',(req,res,next)=>{
+router.get('/api/',(req,res,next)=>{
   User.find().then(doc=>{
       res.status(200).json({
           user:doc
@@ -115,7 +115,7 @@ router.get('/',(req,res,next)=>{
    })
 })
 });
-router.get('/:userID',(req,res,next)=>{
+router.get('/api/:userID',(req,res,next)=>{
   User.find({_id:req.params.userID}).then(result =>{
       res.status(200).json({
           user : result
@@ -138,7 +138,7 @@ router.get('/userInfo/:mail',(req,res,next)=>{
   })
 })
 
-router.patch('/updateuser/:id',(req,res,next)=>{
+router.patch('/api/updateuser/:id',(req,res,next)=>{
   bcrypt.hash(req.body.password,10).then(hash=>{
    const newuser={
      firstName :req.body.firstName,
@@ -178,7 +178,7 @@ router.patch('/updateuser/:id',(req,res,next)=>{
   })
 
 })
-router.delete('/deleteuser/:id',(req,res,next)=>{
+router.delete('/api/deleteuser/:id',(req,res,next)=>{
   User.findOneAndDelete({_id:req.params.id}).then(result=>{
     if(result==null){
       res.status(404).json({

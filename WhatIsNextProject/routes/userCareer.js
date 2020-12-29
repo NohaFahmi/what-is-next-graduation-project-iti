@@ -3,7 +3,7 @@ var express = require ('express');
 var router = express.Router();
 const UserCareer = require('../models/UserCareer');
 
-router.post('/',(req,res,next)=>{
+router.post('/api/',(req,res,next)=>{
     const newuserCareer = new UserCareer({
         user:req.body.user,
         career:req.body.career
@@ -18,7 +18,7 @@ router.post('/',(req,res,next)=>{
         })
       })
 })
-router.get('/',(req,res,next)=>{
+router.get('/api/',(req,res,next)=>{
     UserCareer.find().populate('career').
     then(doc=>{
         res.status(200).json({
@@ -31,7 +31,7 @@ router.get('/',(req,res,next)=>{
       })
 })
 
-router.patch('/:usercareerID',(req,res,next)=>{
+router.patch('/api/:usercareerID',(req,res,next)=>{
     const newusercareer={
         user:req.body.user,
         career:req.body.career
@@ -49,7 +49,7 @@ router.patch('/:usercareerID',(req,res,next)=>{
     })
 })
 
-router.delete('/:usercareerID',(req,res,next)=>{
+router.delete('/api/:usercareerID',(req,res,next)=>{
     UserCareer.findOneAndDelete({_id:req.params.usercareerID}).then(doc=>{
       if(doc==null){
         res.status(404).json({

@@ -1,7 +1,7 @@
 //get all careers APIs
 export const getAllCareers = async() => {
 
-    let res = await fetch('http://localhost:3000/career/');
+    let res = await fetch('api/career/');
     let payload = await res.json();
 
     return {
@@ -13,7 +13,7 @@ export const getAllCareers = async() => {
 //post login info and get token APIs
 export const user_login = async(info) => {
     
-    let res = await fetch('http://localhost:3000/users/signin', {
+    let res = await fetch('api/users/signin', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
    
@@ -30,7 +30,7 @@ export const user_login = async(info) => {
 //post signup info APIs
 export const user_signup = async(info) => {
     
-    let res = await fetch('http://localhost:3000/users/signup', {
+    let res = await fetch('api/users/signup', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
    
@@ -54,7 +54,7 @@ export const get_full_user_info = async(email) => {
     };
     
     const res = await fetch(
-        `http://localhost:3000/users/userInfo/${email}`,
+        `api/users/userInfo/${email}`,
         requestOptions
     );
 
@@ -75,7 +75,7 @@ export const get_full_user_info_by_ID = async(id) => {
     };
     
     const res = await fetch(
-        `http://localhost:3000/users/${id}`,
+        `api/users/${id}`,
         requestOptions
     );
 
@@ -89,7 +89,7 @@ export const get_full_user_info_by_ID = async(id) => {
 //update userInfo by id APIs
 export const update_user_data = async(info, id) => {
     console.log(info)
-    let res = await fetch(`http://localhost:3000/users/updateuser/${id}`, {
+    let res = await fetch(`api/users/updateuser/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
    
@@ -107,7 +107,7 @@ export const update_user_data = async(info, id) => {
 //Join track selected with user APIs
 export const join_track_with_user = async(info) => {
     
-    let res = await fetch('http://localhost:3000/userCareer/', {
+    let res = await fetch('api/userCareer/', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
    
@@ -125,7 +125,7 @@ export const join_track_with_user = async(info) => {
 //update step with user APIs
 export const update_user_career = async(info, id) => {
     
-    let res = await fetch(`http://localhost:3000/userCareer/${id}`, {
+    let res = await fetch(`api/userCareer/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
    
@@ -143,7 +143,7 @@ export const update_user_career = async(info, id) => {
 //get all users careers
 export const getAllUsersCareers = async() => {
 
-    let res = await fetch('http://localhost:3000/userCareer/');
+    let res = await fetch('api/userCareer/');
     let payload = await res.json();
 
     return {
@@ -161,7 +161,7 @@ export const getTracks = async(careerName) => {
     };
     
     const res = await fetch(
-        `http://localhost:3000/career/tracks/${careerName}`,
+        `api/career/tracks/${careerName}`,
         requestOptions
     );
 

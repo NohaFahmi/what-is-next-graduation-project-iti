@@ -5,7 +5,7 @@ const Career = require('../models/Career');
 
 
 
-router.get('/',(req,res,next)=>{
+router.get('/api/',(req,res,next)=>{
    Career.find().then(doc=>{
        res.status(200).json({
            career:doc
@@ -17,7 +17,7 @@ router.get('/',(req,res,next)=>{
     })
 })
 });
-router.get('/tracks/:careerName',(req,res,next)=>{
+router.get('/api/tracks/:careerName',(req,res,next)=>{
     Career.find({careerName:req.params.careerName}).
     select('track')
     .then(doc=>{
@@ -33,7 +33,7 @@ router.get('/tracks/:careerName',(req,res,next)=>{
  });
  
 
- router.get('/courses',(req,res,next)=>{
+ router.get('/api/courses',(req,res,next)=>{
     Career.find().
     select('track.course')
     .then(doc=>{
@@ -48,7 +48,7 @@ router.get('/tracks/:careerName',(req,res,next)=>{
  })
  });
 
-router.post('/addcareer',(req,res,next)=>{
+router.post('/api/addcareer',(req,res,next)=>{
 const career = new Career({
     careerName : req.body.careerName,
     careerImage:req.body.careerImage,
@@ -65,7 +65,7 @@ career.save().then(doc=>{
     })
 })
 })
-router.get('/:careerID',(req,res,next)=>{
+router.get('/api/:careerID',(req,res,next)=>{
     Career.find({_id:req.params.careerID}).then(result =>{
         res.status(200).json({
             career : result
@@ -77,7 +77,7 @@ router.get('/:careerID',(req,res,next)=>{
     })
 })
 
-router.patch('/:careerID',(req,res,next)=>{
+router.patch('/api/:careerID',(req,res,next)=>{
     const newcareer={
         careerName : req.body.careerName,
         careerImage:req.body.careerImage,
@@ -96,7 +96,7 @@ router.patch('/:careerID',(req,res,next)=>{
     })
 })
 
-router.delete('/:careerID',(req,res,next)=>{
+router.delete('/api/:careerID',(req,res,next)=>{
     Career.findOneAndDelete({_id:req.params.careerID}).then(doc=>{
       if(doc==null){
         res.status(404).json({
