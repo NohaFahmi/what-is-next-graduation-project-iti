@@ -1,0 +1,80 @@
+.welcome-container{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 80px 0 0 0;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+    
+}
+
+.text-side h2 {
+    display: block;
+    /* font-size: 2.5rem; */
+}
+.text-side h3 {
+    /* font-size: 2rem; */
+    margin: 30px 0;
+}
+
+.text-side {
+    /* width: 60%; */
+    margin-top: 10px;
+    flex: 1;
+    padding-right: 30px;
+}
+.img-side img{
+    width: 100%;  
+}
+.img-side {
+    /* width: 80%; */
+    /* min-width: 50%; */
+    /* height: 500px; */
+    flex: 2;
+    
+}
+.dropdowns {
+    display: flex;
+    /* flex-direction: column; */
+    margin-top: 50px;
+    align-items: flex-start;
+    /* border: 1px solid black */
+}
+
+.drop-career, .drop-tracks {
+   width: 150px;
+   height: 48px;
+   /* font-size: 24px; */
+   font-weight: 500;
+}
+.drop-career {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.go-btn {
+    width: 90px;
+    /* height: 48px; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #E07367;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+
+.go-btn:hover {
+    border-color: #E07367;
+    background-color: white;
+    color: #E07367;
+
+}
+
+.go-btn:focus {
+    border-color: #E07367;
+    background-color: white;
+    color: #E07367;
+
+}

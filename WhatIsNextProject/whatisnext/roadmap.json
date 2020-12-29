@@ -1,0 +1,213 @@
+{
+    "steps": [
+      {
+        "id": "step-1",
+        "index": 1,
+        "title": {
+          "main": "How Internet Works",
+          "sub": " "
+        },
+        "time": "1 day",
+        "tasks": []
+      },
+      {
+        "id": "step-2",
+        "index": 2,
+        "title": {
+          "main": "HTML & CSS",
+          "sub": " "
+        },
+        "time": "1 week",
+        "tasks": [
+            {
+                "title":"Simple Landing Page",
+                "description": "simple html page with css styling."
+            },
+            {
+                "title":"Animal Card",
+                "description": "Simple card about your favorite animal, put his image, name and info about it."   
+            }
+        ]
+      },
+      {
+        "id": "step-3",
+        "index": 3,
+        "title": {
+          "main": "JavaScript",
+          "sub": " "
+        },
+        "time": "2 weeks",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },{
+        "id": "step-4",
+        "index": 4,
+        "title": {
+          "main": "Version Control System",
+          "sub": "GitHub, Git"
+        },
+        "time": "2 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-5",
+        "index": 5,
+        "title": {
+          "main": "Web Security Knowledge",
+          "sub": " "
+        },
+        "time": "2 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-6",
+        "index": 6,
+        "title": {
+            "main": "Package Managers",
+            "sub": "npm, yarn, Modern JS"
+        },
+        "time": "3 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-7",
+        "index": 7,
+        "title": {
+          "main": "Css Architecture, Css Processor (Sass)",
+          "sub": ""
+        },
+        "time": "3 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-8",
+        "index": 8,
+        "title": {
+            "main": "Build Tools:",
+            "sub" : "Task Runners(npm, Gulp), Linters & Formatters(prettier), Module Bundlers (webpack, parcel, rollup)"
+        },
+        "time": "3 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-9",
+        "index": 9,
+        "title": {
+            "main": "JS Frameworks",
+            "sub" : "Angular  Vue.js React.js"
+        },
+        "time": "3 weeks",
+        "tasks": [
+            {
+                "title":"Simple Landing Page",
+                "description": "simple html page with css styling."
+            },
+            {
+                "title":"Animal Card",
+                "description": "Simple card about your favorite animal, put his image, name and info about it."   
+            },
+            {
+                "title": " A Tribute Page",
+                "description": "Make a webpage writing about that person adding his/her image. On the top of the webpage, add the image and name of the person and below that give layout for the rest of the details."
+            }
+        ]
+      },
+      {
+        "id": "step-10",
+        "index": 10,
+        "title": {
+            "main": "Web Components",
+            "sub" : "HTML Templates"
+        },
+        "time": "3 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-11",
+        "index": 11,
+        "title": {
+            "main": "Css Frameworks",
+            "sub" : "Bootstrap  Materialize  Material UI  Reactstrap"
+        },
+        "time": "5 days",
+        "tasks": [
+            {
+                "title":"Simple Landing Page",
+                "description": "simple html page with css styling."
+            },
+            {
+                "title":"Animal Card",
+                "description": "Simple card about your favorite animal, put his image, name and info about it."   
+            },
+            {
+                "title": " A Tribute Page",
+                "description": "Make a webpage writing about that person adding his/her image. On the top of the webpage, add the image and name of the person and below that give layout for the rest of the details."
+            }
+        ]
+      },
+      {
+        "id": "step-12",
+        "index": 12,
+        "title": {
+            "main": "Testing",
+            "sub" : "Jest, react-testing-library, Cypress, Enzyme"
+        },
+        "time": "2 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      },
+      {
+        "id": "step-13",
+        "index": 13,
+        "title": {
+            "main": "Type Checkers",
+            "sub" : "Typescript"
+        },
+        "time": "4 days",
+        "tasks": [
+          {
+            "title":"Simple Landing Page",
+            "description": "simple html page with css styling."
+        }
+        ]
+      }
+    ]
+  }
