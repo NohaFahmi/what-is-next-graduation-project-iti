@@ -1,0 +1,19 @@
+{
+    "user": [
+        {
+            "f_name": "Noha",
+            "l_name": "Mohammed",
+            "email": "nm1488@fayoum.edu.eg",
+            "password": "Noha2210",
+            "profile_img": "",
+            "age": 0,
+            "gender": "female",
+            "bio": "",
+            "location": {
+                "country": "Egypt",
+                "city": "Cairo"
+            },
+            "social_links": ["github", "Linkedin", "Twitter"]
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+.res-card {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.ant-card-body {
+    padding: 1% 0 7% 1%;
+}
+.ant-card-bordered {
+    box-shadow: 3px 3px 1px #2d6066 !important;
+    border-radius: 5px;
+}
+.res-card h6 {
+    color: #1912DF;
+}
+
+.res-card hr {
+    width: 95%;
+    margin: 12% 0 0 2%;
+} 
+
+.res-details {
+    padding: 9% 0 0 2%; 
+}
+
+.res-details .button {
+    width: 20%;
+    float: right;
+    margin-right: 3%;
+    height: 35px;
+    border-radius: 4px;
+    border: none;
+    background-color: #e07367;
+    color: #fff;
+    margin-top: -3%;
+    padding: 5px;
+}
+
+.res-details a:nth-child(1){
+    font-weight: 700;
+    color: #1912DF;
+}
+
+.res-details a:nth-child(2){
+    font-weight: 700;
+    color: #CBD11B;
+    padding-left: 2%;
+}
+
+.res-details .anticon svg {
+    margin-top: -7px;
+}
+
+/* .res-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+} */
