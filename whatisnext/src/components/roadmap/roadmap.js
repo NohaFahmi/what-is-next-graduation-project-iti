@@ -213,13 +213,15 @@ class Roadmap extends Component {
 
     componentDidMount() {
         AOS.init();
-
-        const careerSelected = localStorage.getItem('careerSelected');
-        this.props.getTracks(careerSelected);
         this.props.getAllUsersCareers();
+        const careerSelected = localStorage.getItem('careerSelected');
         if(this.state.clicked) {
             this.getUserCareerById(this.props);
         }
+        if(careerSelected) {
+            this.props.getTracks(careerSelected);
+        }
+        
         let percent = localStorage.getItem('current_progress');
         let step = localStorage.getItem('current_step');
         if(percent && step){
@@ -233,7 +235,7 @@ class Roadmap extends Component {
 
 
 const mapStateToProps = (state) => {
-    // console.log('STATE ROADMAP', state.careers.tracks);
+    console.log('STATE ROADMAP', state);
 
     return {
         listOfTracks: state.careers.tracks,

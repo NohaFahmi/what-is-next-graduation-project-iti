@@ -58,7 +58,7 @@ const Tasks = (props) => {
                     {/* {renderTasks()} */}
                 </div>
 
-                <a size='large' className="submit-tasks-btn btn-success" href='/profile' >
+                <a size='large' className="submit-tasks-btn btn-success" href={`/profile/${localStorage.getItem('user_id')}`}>
                     Submit Your tasks
                 </a>
             </div>

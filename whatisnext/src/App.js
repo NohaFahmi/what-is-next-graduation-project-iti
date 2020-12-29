@@ -47,7 +47,7 @@ const App = (props) => {
           <Route path="/tabs/roadmap" component={Roadmap}/>
           <Route path="/tabs/resources" component={Resources}/>
           <Route path="/tabs/community" component={Community}/>
-          <Route path="/profile" component={Profile}/>
+          <Route path="/profile/:id" component={Profile}/>
           <Route path="/settings" component={Settings}/>
           <Route exact path="/careerInformation/:career" component={CareerInformation} />
         </Switch>

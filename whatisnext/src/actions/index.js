@@ -66,6 +66,26 @@ export const get_full_user_info = async(email) => {
     }
 }
 
+//get user information by id
+export const get_full_user_info_by_ID = async(id) => {
+
+    const requestOptions = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    };
+    
+    const res = await fetch(
+        `http://localhost:3000/users/${id}`,
+        requestOptions
+    );
+
+    let payload = await res.json();
+
+    return {
+        type: 'GET_ALL_USER_INFO_BY_ID',
+        payload
+    }
+}
 //update userInfo by id APIs
 export const update_user_data = async(info, id) => {
     console.log(info)

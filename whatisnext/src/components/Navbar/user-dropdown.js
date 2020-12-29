@@ -10,7 +10,7 @@ const UserDropdown = ({ click }) => {
                         <img src={localStorage.getItem('profile_img')} width="40" height="40" class="rounded-circle" alt='logo' />
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/profile">Profile</a>
+                        <a class="dropdown-item" href={`/profile/${localStorage.getItem('user_id')}`}>Profile</a>
                         <a class="dropdown-item" href="/settings">Settings</a>
                         <a class="dropdown-item" href="/" onClick={click}>Log Out</a>
                     </div>

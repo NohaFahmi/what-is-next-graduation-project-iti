@@ -9,7 +9,10 @@ export const users = (state={}, action) => {
 
         case 'GET_ALL_USER_INFO':
             return {...state, user_info: action.payload}
-        
+
+        case 'GET_ALL_USER_INFO_BY_ID':
+            return {...state, user_info_by_id: action.payload}
+
         case 'UPDATE_USER_DATA':
             return {...state, new_data: action.payload}
 

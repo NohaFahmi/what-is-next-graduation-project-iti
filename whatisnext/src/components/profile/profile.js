@@ -19,7 +19,10 @@ class Profile extends Component {
         super();
         this.state = {
             current: 0,
-            sample_type: ""
+            sample_type: "",
+            data: {
+
+            }
         }
     }
 
@@ -44,28 +47,65 @@ class Profile extends Component {
         //map on samples coming from api
     }
 
+   updateProfile = async ({user_data}) => {
+       if(user_data) {
+            let data = this.state.data;
+            data['_id'] = this.props.user_data.user[0]._id
+            data['firstName'] = this.props.user_data.user[0].firstName
+            data['lastName'] = this.props.user_data.user[0].lastName
+            data['mail'] = this.props.user_data.user[0].mail
+            data['password'] = this.props.user_data.user[0].password
+            data['age'] = (this.props.user_data.user[0].age) ? this.props.user_data.user[0].age : ''
+            data['gender'] = (this.props.user_data.user[0].gender) ? this.props.user_data.user[0].gender : ''
+            data['location'] = (this.props.user_data.user[0].location) ? this.props.user_data.user[0].location : ''
+            data['bio'] = (this.props.user_data.user[0].bio) ? this.props.user_data.user[0].bio : ''
+            data['socialLinks'] = (this.props.user_data.user[0].socialLinks) ? this.props.user_data.user[0].socialLinks : ''
+            data['profilPicture'] = (this.props.user_data.user[0].profilPicture) ? this.props.user_data.user[0].profilPicture : ''
+                console.log('DATA', data)
+        await this.setState({data})
+       }
+   }
     render() {
+        // const {data} = this.state
+
         return (
             <div className="profile-container">
-            {(this.props.user_data) ? 
+            
                 <div className="profile-header">
                     <div className="bio-container">
                         <Row className="bio-row">
                             <Col>
-                                <p className="bio">{this.props.user_data.user[0].bio}</p>
+                            
+                                <p className="bio">{this.state.data.bio}</p>
+                              
                             </Col>
                         </Row>
                         
                         <Row className="justify-content-between mt-5">
-                        {/* {this.props.all_user_data.location} */}
-                            <Col xs='auto'><p className="location">{this.props.user_data.user[0].location.country}, {this.props.user_data.user[0].location.region}</p></Col>
+                        <Col xs='auto'>
+                        {(this.state.data.location) ? 
+                            <p className="location">{this.state.data.location.country}, {this.state.data.location.region}</p>
+                        :
+                        <p className="location"></p>
+                        }
+                        </Col>
                             <Col xs='auto'>
                             
-                                <div className="social-icons">
-                                    <a href={this.props.user_data.user[0].socialLinks.github} className='github'><GithubOutlined style={{ color: '#24292e', marginLeft: '10px' }} /></a>
-                                    <a href={this.props.user_data.user[0].socialLinks.linkedin} className='linkedin'><LinkedinOutlined style={{ color: '#0073b1', marginLeft: '15px' }} /> </a>
-                                    <a href={this.props.user_data.user[0].socialLinks.twitter} className='twitter'><TwitterOutlined style={{ color: '#1da1f2', marginLeft: '10px' }} /></a>
-                                </div>
+                                
+                                    {(this.state.data.socialLinks) ? 
+                                        <div className="social-icons">
+                                            <a href={this.state.data.socialLinks.github} className='github'><GithubOutlined style={{ color: '#24292e', marginLeft: '10px' }} /></a>
+                                            <a href={this.state.data.socialLinks.linkedin} className='linkedin'><LinkedinOutlined style={{ color: '#0073b1', marginLeft: '15px' }} /> </a>
+                                            <a href={this.state.data.socialLinks.twitter} className='twitter'><TwitterOutlined style={{ color: '#1da1f2', marginLeft: '10px' }} /></a>
+                                        </div>
+                                    :
+                                    <div className="social-icons">
+                                            <a href=' ' className='github'><GithubOutlined style={{ color: '#24292e', marginLeft: '10px' }} /></a>
+                                            <a href=' ' className='linkedin'><LinkedinOutlined style={{ color: '#0073b1', marginLeft: '15px' }} /> </a>
+                                            <a href=' ' className='twitter'><TwitterOutlined style={{ color: '#1da1f2', marginLeft: '10px' }} /></a>
+                                        </div>
+                                    }
+                                    
                             </Col>
                         </Row>
 
@@ -73,15 +113,12 @@ class Profile extends Component {
                     </div>
 
                     <div className="profile-avatar-container">
-                        <Row className="justify-content-center"><h3>{this.props.user_data.user[0].firstName} {this.props.user_data.user[0].lastName}</h3></Row>
+                        <Row className="justify-content-center"><h3>{this.state.data['firstName']} {this.state.data['lastName']}</h3></Row>
                         <Row className="justify-content-center"><img src={localStorage.getItem('profile_img')} alt="avatar-img" className="rounded-circle avatar" /></Row>
                     </div>
 
                 </div>
-                : 
 
-                <Loading />
-                            }
                 <div className="profile-body">
                     <div className="user-current-progress">
                         <div className="current-progress">
@@ -134,27 +171,33 @@ class Profile extends Component {
     }
 
     componentDidMount() {
+        this.props.get_full_user_info_by_ID(this.props.match.params.id)
+        if(this.props.get_full_user_info_by_ID(this.props.match.params.id)) {
+            this.updateProfile(this.props) 
+        }
         AOS.init()
+
         const careerSelected = localStorage.getItem('careerSelected');
-        this.props.getTracks(careerSelected);
+        if(careerSelected) {
+        
+            this.props.getTracks(careerSelected);
+
+        }
         const current = localStorage.getItem('current_step');
         if(current) {
           this.setState({current: current});
         }
-        const email = localStorage.getItem('user_mail');
-        if(email) {
-            this.props.get_full_user_info(email);
-            
 
-        }
+            // console.log(this.props.match.params.id)
+        
     } 
     }
     
     const mapStateToProps = (state) => {
-    //   console.log('STATE', state.users.user_info);
+      console.log('STATE', state.users.user_info_by_id);
       return {
         listOfTracks: state.careers.tracks,
-        user_data: state.users.user_info
+        user_data: state.users.user_info_by_id
       }
     }
 

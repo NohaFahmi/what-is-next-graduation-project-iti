@@ -10,6 +10,7 @@ import SocialLinks from './social-links';
 import PasswordSettings from './password-settings';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom';
+import Loading from './../loading/loading';
 
 const { TabPane } = Tabs;
 const IconFont = createFromIconfontCN({
@@ -24,7 +25,7 @@ class Settings extends Component {
         this.state={
             user: '',
             profile:true,
-            // allUserData: {}
+            data: {}
 
         }
     }
@@ -38,8 +39,8 @@ class Settings extends Component {
     
     render() {
         // const {user_data} = this.props
-        // if(user_data) {
-            // console.log("FULL USER IS HERE", user_data)
+        if(this.props.user_data) {
+            console.log("FULL USER IS HERE", this.props.user_data)
             return (
                 <div className='settings-container'>
                     <h2>Account Settings</h2>
@@ -67,8 +68,8 @@ class Settings extends Component {
                     </div>
                 </div>
             )
-        // }
-        // return <Loading />
+        }
+        return <Loading />
         
     }
 
@@ -80,7 +81,25 @@ class Settings extends Component {
         }
         const email = localStorage.getItem('user_mail');
         if(email) {
+            console.log(email)
             this.props.get_full_user_info(email);
+            if(this.props.user_data) {
+                let data = this.state.data
+                data['_id'] = this.props.user_data.user[0]._id
+                data['firstName'] = this.props.user_data.user[0].firstName
+                data['lastName'] = this.props.user_data.user[0].lastName
+                data['mail'] = this.props.user_data.user[0].mail
+                data['password'] = this.props.user_data.user[0].password
+                data['age'] = (this.props.user_data.user[0].age) ? this.props.user_data.user[0].age : ''
+                data['gender'] = (this.props.user_data.user[0].gender) ? this.props.user_data.user[0].gender : ''
+                data['location'] = (this.props.user_data.user[0].location) ? this.props.user_data.user[0].location : ''
+                data['bio'] = (this.props.user_data.user[0].bio) ? this.props.user_data.user[0].bio : ''
+                data['socialLinks'] = (this.props.user_data.user[0].socialLinks) ? this.props.user_data.user[0].socialLinks : ''
+                data['profilPicture'] = (this.props.user_data.user[0].profilPicture) ? this.props.user_data.user[0].profilPicture : ''
+                this.setState({
+                    data
+                })
+            }   
         }
       
     }
@@ -88,7 +107,7 @@ class Settings extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log('STATE SETTINGS', state);
+    console.log('STATE SETTINGS', state);
     return {
         user_data: state.users.user_info
 
