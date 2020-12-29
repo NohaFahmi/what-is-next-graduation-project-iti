@@ -181,7 +181,7 @@ class SignUp extends Component {
         <div className="right-child">
             {/**************** * SIGN UP DIV*********************/}
           {!this.state.sign_In && (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} style={{width: '400px'}}>
               <div className="signUp">
                 <p>Sign Up</p>
                 <p>Join Our Community</p>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions'
+import logo from "../../assets/surface1.svg";
+
 //actions
 
 class Login extends Component {
@@ -44,8 +46,14 @@ class Login extends Component {
   }
     render() {
         return (
-          
-            <form onSubmit={this.handleSignIn}>
+          <div className="parent-box">
+        <div className="left-child">
+          <img src={logo} className="in-logo" alt='logo'/>
+          <p className="in-text">
+            <b>Find your learning path and start your journey</b>
+          </p>
+        </div>
+            <form onSubmit={this.handleSignIn} >
               <div className="signUp">
                 <p>Sign in</p>
                 <p>Welcome Back</p>
@@ -64,14 +72,10 @@ class Login extends Component {
                 <input type="submit" value="Sign In"/>
               </div>
             </form>
+            </div>
         )
     }
-    componentDidMount() {
-    }
-    componentWillUnmount() {
-      
-        // 
-    }
+    
 }
 const mapStateToProps = (state) => {
     console.log('LOGIN STATE', state)

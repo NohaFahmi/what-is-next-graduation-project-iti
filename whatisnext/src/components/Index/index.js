@@ -1,13 +1,14 @@
-import Welcome from "../welcome/welcome"
-import Explore from "../explore/explore"
+import Welcome from "./../welcome/welcome"
+import Explore from "./../explore/explore"
 import AboutUs from './../about-us/about-us';
+import Features from './../features/features'
 
-
-const Index = ( ) => {
+const Index = () => {
     return (
         <div>
             <Welcome />
             <Explore />
+            <Features />
             <AboutUs />
         </div>
         
