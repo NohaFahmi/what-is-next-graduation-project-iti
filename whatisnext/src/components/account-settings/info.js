@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import {DatePicker, Input } from 'antd';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import { connect } from 'react-redux';
+import * as actions from '../../actions'
 // CountryRegionData
 class Info extends Component {
 
@@ -10,11 +12,11 @@ class Info extends Component {
         this.state = {
             country: '',
             region: '',
-            info: {
+            data: {
 
             },
             save_disabled: true,
-            bio: ""
+            bio: "",
         };
 
         // const userInfo = this.props.userInfo[0];
@@ -25,9 +27,9 @@ class Info extends Component {
         let d = new Date(date).getFullYear();
         let c = new Date().getFullYear();
         // console.log(c - d);
-        let info = this.state.info;
-        info["age"] = c - d;
-        this.setState({info});
+        let data = this.state.data;
+        data["age"] = c - d;
+        this.setState({data});
     }
 
     handleChange = (e) => {
@@ -35,10 +37,15 @@ class Info extends Component {
         this.setState({save_disabled: false});
         if(e.target.id === 'user-bio') {
             this.setState({bio: e.target.value})
+        } 
+        if(e.target.name === 'gender') {
+            let data = this.state.data;
+            data[e.target.name] = e.target.value;
+            this.setState({data});
         }
-        let info = this.state.info;
-        info[e.target.name] = e.target.value;
-        this.setState({info});
+        
+        
+        
         
 
     }
@@ -53,18 +60,20 @@ class Info extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("info", this.state.info);
-        let data = {
-            age: this.state.info.age,
-            gender: this.state.info.gender,
-            location: {
-                country: this.state.country,
-                city: this.state.region
-            },
-            bio: this.state.bio
-        }
-        this.props.getData(data);
+
+        let data = this.state.data
+
+        data['location'] = {'country': this.state.country, 'region': this.state.region}
+        data['bio'] = this.state.bio
+        data['career'] = localStorage.getItem('track_selected');
+        
+        this.setState({data});
+        
+        this.props.update_user_data(this.state.data, this.state.data._id);
+        
     }
+
+   
     render() {
         return(
             <div className="Content-container">
@@ -72,13 +81,13 @@ class Info extends Component {
                                     <h5>About You</h5>
                                     <Form.Row className="mt-4">
                                         <Col xs={5}>
-                                            <textarea className="form-control" placeholder="Tell Us More About yourself" id='user-bio' name="bio" onChange={this.handleChange}/>
+                                            <textarea className="form-control" placeholder="Tell Us More About yourself" id='user-bio' name="bio" onChange={this.handleChange} />
                                         </Col>
                                     </Form.Row>
                                     <h5>Gender</h5>
                                     <Form.Row className="mt-4">
                                         <Col xs={3}>
-                                            <select className="form-control" onChange={this.handleChange} name="gender">
+                                            <select className="form-control" onChange={this.handleChange} name="gender" value={this.state.data['gender']}>
                                                 <option >Male</option>
                                                 <option>Female</option>
                                             </select>
@@ -114,24 +123,45 @@ class Info extends Component {
                             </div>
         )
     }
-
     componentDidMount() {
-        // console.log(this.props.user_info);
-        // let data = {
-        //     age: this.state.info.age,
-        //     gender: this.state.info.gender,
-        //     location: {
-        //         country: this.state.country,
-        //         city: this.state.region
-        //     },
-        //     bio: this.state.bio
-        // }
-        // this.props.getData(data);
-    }
 
-    componentDidUpdate() {
-       
+        const login_token = localStorage.getItem('auth_token');
+        if (login_token) {
+            this.setState({ 'user': login_token, 'profile': true })
+        }
+        const email = localStorage.getItem('user_mail');
+        if (email) {
+            console.log(email)
+            this.props.get_full_user_info(email);
+            if(this.props.get_full_user_info(email)) {
+                let data = this.state.data
+                data['_id'] = this.props.user_data.user[0]._id
+                data['firstName'] = this.props.user_data.user[0].firstName
+                data['lastName'] = this.props.user_data.user[0].lastName
+                data['mail'] = this.props.user_data.user[0].mail
+                data['password'] = this.props.user_data.user[0].password
+                data['age'] = (this.props.user_data.user[0].age) ? this.props.user_data.user[0].age : ''
+                data['gender'] = (this.props.user_data.user[0].gender) ? this.props.user_data.user[0].gender : ''
+                data['location'] = (this.props.user_data.user[0].location) ? this.props.user_data.user[0].location : ''
+                data['bio'] = (this.props.user_data.user[0].bio) ? this.props.user_data.user[0].bio : ''
+                data['socialLinks'] = (this.props.user_data.user[0].socialLinks) ? this.props.user_data.user[0].socialLinks : ''
+                data['profilPicture'] = (this.props.user_data.user[0].profilPicture) ? this.props.user_data.user[0].profilPicture : ''
+                this.setState({
+                    data
+                })
+            } 
+        }
+
+    }
+    
+
+}
+const mapStateToProps = (state) => {
+    // console.log('STATE SETTINGS', state.users.user_info);
+    return {
+        user_data: state.users.user_info,
+        update_msg: state.users.new_data
+
     }
 }
-
-export default Info;
+export default connect(mapStateToProps, actions)(Info);

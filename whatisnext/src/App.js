@@ -1,88 +1,63 @@
 //routing
-import {BrowserRouter,Route, Switch} from 'react-router-dom'
-import Signup from './containers/SignUp/signUp';
-import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom'
+import React, { useState } from 'react';
 //redux
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware} from 'redux';
-import  promiseMiddleware  from 'redux-promise';
-
+import { createStore, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
 //reducer
-import reducers from './reducers';
-
+import reducers from './reducers'
 //components
-import Index from './components/Index';
-import Navigation from './components/navbar/navbar';
-import Resources from './components/resources/resource'
-import SecondNav from './components/secondNav/second-nav'
-import Tabs from './components/tabs/tabs'
+import Navbar from './components/navbar/navbar'
+import SignUp from './components/signup/signUp';
+import Login from './components/signup/login';
+import Index from './components/index/index';
 import Roadmap from './components/roadmap/roadmap';
-import Community from './components/community/community'
-import Settings from './components/account-settings/setting';
+import SecondNav from './components/secondNav/second-nav';
+import Tabs from './components/tabs/tabs';
+import Resources from './components/resources/resources';
+import Community from './components/community/community';
 import Profile from './components/profile/profile';
-import CareerInformation from "./components/career-information/careerInformation";
-import Footer from './components/footer/footer';
-// import RedirectToSignup from './components/redirectToSignup';
-import { Redirect } from 'react-router-dom';
+import Settings from './components/account-settings/setting';
+import Footer from './components/Footer/footer';
+import CareerInformation from './components/career-information/careerInformation';
 
-//1. create store
+
+//create store
 const createStoreWithMW = applyMiddleware(promiseMiddleware)(createStore);
 
-class App extends Component {
-  constructor(){
-    super()
-    this.state = {
-      profile:false
-    }
-  }
-  render() {
+const App = (props) => {
+  const isLogin = props.isLogin
+  console.log('APP PROPS', props)
+ 
+  return (
 
-    const LoginContainer = () => (
-      <div>
-        <Route path='/' render={() => {
-          <Redirect to='/signup' />
-        }} />
-        <Route path='/signup' component={Signup} />
-      </div>
-    )
+    <Provider store={createStoreWithMW(reducers)}>
 
-    // const DefaultContainer = () => (
-    //   <div>
-         
-    //   </div>
-              
-    // )
-    return (
-      <div>
-           <Provider store={createStoreWithMW(reducers)}>
-             <BrowserRouter>
-             <Navigation/>
+      <BrowserRouter>
+         {(isLogin)? <Navbar /> : null}
+        <Switch>
+        
+          <Route exact path="/" component={Index}/>
+          <Route path="/home" component={Index}/>
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login}/>
+          <Route path="/nav2" component={SecondNav}/>
+          <Route path="/tabs" component={Tabs}/>
+          <Route path="/tabs/roadmap" component={Roadmap}/>
+          <Route path="/tabs/resources" component={Resources}/>
+          <Route path="/tabs/community" component={Community}/>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/settings" component={Settings}/>
+          <Route exact path="/careerInformation/:career" component={CareerInformation} />
+        </Switch>
+        <Footer/>
+        
+      </BrowserRouter>
 
-              <Switch>
-                <Route exact path="/" component={Index}/>
-                <Route path="/signup" component={Signup}/>
-                {/* <Route component={RedirectToSignup} /> */}
-                <Route path="/tabs/resources" component={Resources}/>
-                <Route path="/nav2" component={SecondNav}/>
-                <Route path="/tabs" component={Tabs}/>
-                <Route path="/tabs/roadmap" component={Roadmap}/>
-                <Route path="/tabs/community" component={Community}/>
-                <Route path="/settings" component={Settings}/>
-                <Route path="/profile" component={Profile}/>
-                <Route exact path='/(signup)' component={LoginContainer} />
+    </Provider>
 
-                <Route exact path="/careerinformation/:career" component={CareerInformation} />
-               
-
-                {/* <Route component={DefaultContainer} /> */}
-              </Switch>
-              <Footer/>
-               
-             </BrowserRouter>  
-           </Provider>
-      </div>
-    );
-  }
+  );
 }
 
 export default App;

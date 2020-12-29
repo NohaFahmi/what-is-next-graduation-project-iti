@@ -2,10 +2,10 @@
     /* border: 1px solid black; */
     width: 100%;
     margin: 30px auto;
-    padding: 10px;
+    padding: 10px 20px;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
+    /* flex-direction: row-reverse; */
+    justify-content: center;
     align-items: flex-start;
     /* position: relative; */
 }
@@ -14,6 +14,7 @@
     border-radius: 5px;
     box-shadow: 4px 4px 4px lightgray;
     background-color: #82BCBA;
+    width: 100%;
 }
 .step-wrapper {
     /* border: 1px solid black; */
@@ -125,6 +126,7 @@
 .tasks-wrapper {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 
 }
 
@@ -136,13 +138,14 @@
 
 .task-btn {
     border-radius: 5px;
-    height: 40px;
-    width: 150px;
+    height: 45px;
+    width: 208px;
     background-color: #1981A7;
     color: whitesmoke;
     /* border-color: #1981A7; */
     /* box-shadow: 3px 3px 3px lightgrey; */
     border: none;
+    /* padding: 10px; */
 }
 
 .task-btn:hover {
@@ -164,6 +167,7 @@
     background-color: #109153;
     color: whitesmoke;
     align-self: flex-end;
+    padding: 10px;
 }
 
 .submit-tasks-btn:hover {
@@ -189,6 +193,7 @@
     color:  #1981A7;
     height: 16px;
     font-weight: 500;
+    width: 130px
     
 }
 
@@ -255,11 +260,11 @@
 }
 
 .save {
-    width: 250px;
+    width: 130px;
     height: 45px;
-    margin-right: -358px;
+    /* margin-right: -358px; */
     border-radius: 10px;
-    font-size: 25px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -268,6 +273,7 @@
     background-color:  #109153;
     box-shadow: 3px 3px 3px lightgray;
     color: whitesmoke;
+    margin: 20px 0 20px 0;
 }
 .save:hover {
     background-color: white;
@@ -277,7 +283,10 @@
     height: 50px; */
     transition: all 0.3s ease-in;
 }
-
+.save:focus {
+    outline: none;
+    border: none
+} 
 .progress-container {
     margin-top: 40px;
     /* border: 1px solid black; */
@@ -288,14 +297,21 @@
 }
 
 .bar-steps {
-    position: sticky;
-    top: 0;
+    
     padding: 10px;
     text-align: center;
     box-shadow: 3px 3px 3px lightgray;
     border-radius: 10px;
+    /* border: 1px solid black; */
 }
 
+.stp-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
 /* .ant-steps-item-icon {
     border-color: #09703E !important;
 }

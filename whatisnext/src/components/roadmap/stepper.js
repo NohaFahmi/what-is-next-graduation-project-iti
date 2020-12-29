@@ -21,16 +21,13 @@ const Stepper = (props) => {
     return (
         <div className="bar-steps">
             <Steps direction="vertical" current={current}>
-                {generateSteps(props)}
+                {/* {generateSteps(props)} */}
             </Steps>
         </div>
     );
 }
 
 const mapStateToProps = (state) => {
-    // console.log('STATE', state.roadmap.steps);
-    return {
-        steps: state.roadmap.steps,
-    }
+   
 }
 export default connect(mapStateToProps)(Stepper);

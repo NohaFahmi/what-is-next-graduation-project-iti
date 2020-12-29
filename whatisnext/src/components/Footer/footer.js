@@ -40,25 +40,25 @@ const Footer = () => {
           </Col>
 
           <Col lg={{ span: 2 }}>
-            <a href=" " className="footer-link">
+            <a href="/" className="footer-link">
               <p>Home</p>
             </a>
-            <a href=" " className="footer-link">
+            <a href="#about-us" className="footer-link">
               <p>About Us</p>
             </a>
-            <a href=" " className="footer-link">
+            <a href="#explore-careers" className="footer-link">
               <p>Explore Career</p>
             </a>
           </Col>
 
           <Col lg={{ offset: 1, span: 2 }}>
-            <a href=" " className="footer-link">
+            <a href="/tabs/roadmap" className="footer-link">
               <p>Roadmap</p>
             </a>
-            <a href=" " className="footer-link">
+            <a href="/tabs/resources" className="footer-link">
               <p>Resources</p>
             </a>
-            <a href=" " className="footer-link">
+            <a href="/tabs/community" className="footer-link">
               <p>Community</p>
             </a>
           </Col>

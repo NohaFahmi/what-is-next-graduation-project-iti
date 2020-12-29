@@ -1,6 +1,6 @@
 import './welcome.css';
 import onlineCourses from '../../assets/online-courses-illustration.jpg';
-import { Divider, Menu, Select, Button } from 'antd';
+import { Divider, Menu, Select, Button, Alert} from 'antd';
 // import { Dropdown, DropdownButton, ButtonGroup , Button} from 'react-bootstrap'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { Component } from 'react'
@@ -10,7 +10,7 @@ import Loading from './../loading/loading';
 import { withRouter } from "react-router-dom";
 
 const { Option } = Select;
-class WelcomeSection extends Component {
+class Welcome extends Component {
     constructor(props) {
         super(props);
 
@@ -20,85 +20,89 @@ class WelcomeSection extends Component {
             trackSelected: "",
             career_id: "",
             // redirect: "/roadmap"
-            user_id: ""
+            user_id: "",
+            user: "",
+            profile: false,
+            career_id: 0
         }
     }
-    saveIdAndCareerID = ({userInfo, careersList}) => {
-        if(careersList) {
-            return careersList.career.map( (career) => {
-                if(career.careerName === this.state.careerSelected) {
-                    console.log(career._id);
-                    
-                    this.setState({'career_id': career._id});
+
+    saveTrackWithUser = ({user_id, listOfCareers}, career_name) => {
+        let id;
+        if(listOfCareers) {
+            listOfCareers.career.map( (career) => {
+                if(career.careerName === career_name) {
+                    id = career._id;
+                    localStorage.setItem('career_id', user_id.user[0]._id)
 
                 }
             })
         }
-        
-        if(userInfo) {
-            console.log(userInfo._id)
-            this.setState({'user_id': userInfo._id});
+        localStorage.setItem('user_id', user_id.user[0]._id)
+        return {
+           user: {
+                   _id: user_id.user[0]._id,
+                   step:0
+                }
+           ,
+           career: id
         }
-    }
+    } 
+
+    //update state with career
     handleCareer = (e) => {
-
-        this.setState({careerSelected: e});
-        this.setState({disable: false});
-        this.saveIdAndCareerID(this.props)
-        
+        this.setState({careerSelected: e, disable: false});
     }
+    //update state with track
     handleTrack = (e) => {
-
-        this.setState({tracksSelected: e});
-        this.saveIdAndCareerID(this.props)
-
-
+        this.setState({trackSelected: e});
     }
+
     redirectToTarget = () => {
         this.props.history.push('/tabs/roadmap')
     }
-    handleClick = (e) => {
-        if((this.state.tracksSelected !== undefined )&& (this.state.careerSelected !== undefined)) {
-            localStorage.setItem('selectedCareer', this.state.careerSelected);
-            localStorage.setItem('selectedTrack', this.state.tracksSelected);
-            let info = {
-                career: this.state.career_id,
-                user: [
-                    {id: this.state.user_id, step:0}
-                ]
+
+    handleSubmitTrack = (e) => {
+        const auth_token = localStorage.getItem("auth_token");
+        if(auth_token) {
+            if(this.state.careerSelected && this.state.trackSelected) {
+                this.props.join_track_with_user(this.saveTrackWithUser(this.props, this.state.careerSelected));
+                this.redirectToTarget();
+                localStorage.setItem('track_selected', this.state.trackSelected);
+                localStorage.setItem('careerSelected', this.state.careerSelected);
+            } else {
+                console.log('select a track!')
             }
-            this.props.UpdateUserCareers(this.state.career_id,info)
-            this.redirectToTarget();
+        } else {
+            console.log('not signed!!');
+            this.props.history.push('/signup')          
         }
     }
-    renderCareers = ({careersList}) => {
-        if(careersList) {
-            // console.log(careersList)
-            return careersList.career.map( (career, index) => {
+
+    //render careers in first dropdown
+    renderCareers = ({listOfCareers}) => {
+        if(listOfCareers) {
+            return listOfCareers.career.map( (career, index) => {
                 // console.log(career)
-                return <Option id={'option-' + index} value={career.careerName}>{career.careerName}</Option>
+                return <Option key={career._id} id={'option-' + index} value={career.careerName}>{career.careerName}</Option>
             })
         }
         return <Loading />
     }
 
-    renderTracks = ({careersList}) => {
-        if(careersList) {
-            // console.log(this.state.careerSelected)
+    renderTracks = ({listOfCareers}) => {
+        if(listOfCareers) {
 
-            return careersList.career.map( (career) => {
+            return listOfCareers.career.map( (career) => {
                 if(career) {
                     if(career.careerName === this.state.careerSelected) {
-                        return career.track.map( (tracks, index) => {
+                        return career.track.map( (item_track, index) => {
                             
                             // console.log('TRACKS', tracks)
-                            return <Option id={'track-' + index} value={tracks.trackName}>{tracks.trackName}</Option>
+                            return <Option key={item_track._id} id={'track-' + index} value={item_track.trackName}>{item_track.trackName}</Option>
                         })
-
                     }
-                    
-                }
-                
+                }               
             })
         }
         return <Loading />
@@ -118,6 +122,7 @@ class WelcomeSection extends Component {
                         <Select defaultValue="Careers" style={{ width: 170, height: 48 }} bordered={true} onChange={this.handleCareer} size='large'>
                             <Option value="Careers" disabled>Careers</Option>
                             {this.renderCareers(this.props)}
+                            
                         </Select>
                     
                         {/*  tracks dropdown*/}
@@ -126,7 +131,7 @@ class WelcomeSection extends Component {
                             {this.renderTracks(this.props)}                            
                         </Select>
                        
-                       <Button  size='large' className='go-btn' onClick={this.handleClick}>GO</Button>
+                       <Button  size='large' className='go-btn' onClick={this.handleSubmitTrack}>GO</Button>
                     </div>
 
                 </div>
@@ -142,26 +147,25 @@ class WelcomeSection extends Component {
     }
 
     componentDidMount() {
-        this.props.getCareers();
-        const user_mail = localStorage.getItem("user_mail");
-        // console.log(user_mail)
-        this.props.getUserInfo(user_mail);
-
-        // console.log(this.state.user_id);
-        // this.props.UpdateUserCareers()
-    }
-
-    // componentWillUnmount() {
+        this.props.getAllCareers();
+        const email = localStorage.getItem('user_mail');
+        if(email) {
         
-    // }
+            this.props.get_full_user_info(email);
+
+        }
+    }
+   
+
+    
 }
 
 const mapStateToProps = (state) => {
-    console.log('STATE', state.users);
-    return {
-        careersList: state.careers.careersList,
-        userInfo: state.users.all_user_info
-    }
+    // console.log("USERS STATE", state.users.user_info.user[0]._id);
+   return {
+       listOfCareers: state.careers.listOfCareers,
+       user_id: state.users.user_info,
+   }
 }
-export default connect(mapStateToProps, actions)(withRouter(WelcomeSection));
+export default connect(mapStateToProps, actions)(withRouter(Welcome));
 

@@ -1,35 +1,69 @@
-import React from "react";
+import React, {Component} from "react";
 import "./second-nav.css";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+import * as actions from '../../actions'
+import Loading from './../loading/loading';
+class SecondNav extends Component {
+  renderImg = ({listOfTracks}) => {
+    if(listOfTracks) {
+      return listOfTracks.map( (track) => {
+        if(track.trackName === localStorage.getItem('track_selected')) {
+          return <img
+                  src={track.trackImage}
+                  alt="nav-header"
+                />
+        }
+      
+    })
+  }
+  return <Loading />
+  }
+  render() {
+    
+    return ( 
+      <div className="second-nav">
 
-const SecondNav = () => {
-  return (
-    <div className="second-nav">
-      <img
-        src="https://images.unsplash.com/photo-1526040652367-ac003a0475fe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8ODh8fGRldmVsb3BlcnxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        alt="nav-header"
-      />
-      <div class="subject">Front End Developer</div>
-      <div className="tabs">
-        <Row style={{ margin: "0" }}>
-          <Col style={{ border: "2px solid white" }} lg={4}>
-            <Link to="/tabs/roadmap" style={{ color: "white" }}>
-              Roadmap
-            </Link>
-          </Col>
-          <Col style={{ border: "2px solid white" }} lg={4}>
+      {this.renderImg(this.props)}
+        
+        <div class="subject">{localStorage.getItem('track_selected')}</div>
+        <div className="tabs">
+          <Row style={{ margin: "0" }}>
+            <Col style={{ border: "2px solid white" }} lg={4}>
+              <Link to="/tabs/roadmap" style={{ color: "white" }}>
+                Roadmap
+              </Link>
+            </Col>
+            <Col style={{ border: "2px solid white" }} lg={4}>
+                
             <Link to="/tabs/resources" style={{ color: "white" }}>
-              Resources
-            </Link>
-          </Col>
-          <Col style={{ border: "2px solid white" }} lg={4}>
-            <Link to="/tabs/community" style={{ color: "white" }}>Community</Link>
-          </Col>
-        </Row>
+                Resources
+              </Link>
+            </Col>
+            <Col style={{ border: "2px solid white" }} lg={4}>
+              <Link to="/tabs/community" style={{ color: "white" }}>Community</Link>
+            </Col>
+          </Row>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+  componentDidMount() {
+    let careerName = localStorage.getItem('track_selected');
+    if(careerName) {
+    
+      this.props.getTracks(careerName);
 
-export default SecondNav;
+    }
+
+  }
+}
+
+const mapStateToProps = (state) => {
+  console.log('Career', state.careers.tracks)
+  return {
+    listOfTracks: state.careers.tracks
+  }
+}
+export default connect(mapStateToProps, actions)(SecondNav);

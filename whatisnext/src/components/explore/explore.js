@@ -6,21 +6,22 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from '../../actions'
 import {Component} from 'react'
+
 class Explore extends Component {
   
   constructor() {
     super()
     this.state = {
-      // careerName: ''
+      careers: {}
     }
   }
 
+  renderCardsCareers = ({listOfCareers}) => {
+    if(listOfCareers) {
+      // console.log(careersList.career)
+      return listOfCareers.career.map( (career) => {
+        return <CareerCard careerData={career} key={career._id} />
 
-  renderCardsCareers = ({careersList}) => {
-    if(careersList) {
-      console.log(careersList.career)
-      return careersList.career.map( (career) => {
-        return <CareerCard careerTitle={career.careerName}/>
       })
   }
 
@@ -39,17 +40,16 @@ class Explore extends Component {
   }
 
   componentDidMount() {
-    this.props.getCareers();
-    // this.props.getInformation(this.state.careerName);
+    this.props.getAllCareers();
+
   }
   
 };
 
 const mapStateToProps = (state) => {
-  // console.log('INFOrmation',state.careers.careersList);
+  // console.log('INFOrmation',state.careers.listOfCareers);
   return {
-      careersList: state.careers.careersList
-      // info: state.careers.information
+    listOfCareers: state.careers.listOfCareers,
   }
 }
 export default connect(mapStateToProps, actions)(withRouter(Explore));

@@ -1,192 +1,64 @@
-// add user API
-// const baseURL = "http://localhost:3001/users";
+//get all careers APIs
+export const getAllCareers = async() => {
 
-export const addUser = async(userInfo) => {
-
-    console.log("ACTION RECEIVED DATA", userInfo);
-    const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-   
-        body: JSON.stringify(userInfo)
-      };
-    const res = await fetch('http://localhost:3000/users/signup', requestOptions);
-
+    let res = await fetch('http://localhost:3000/career/');
     let payload = await res.json();
-    
+
     return {
-        type: 'ADD_USER',
+        type: 'GET_CAREERS',
         payload
     }
 }
 
-//Get UserData API
-// const userURL = "http://localhost:3010/user";
-export const getUserData = async(loginInfo) => {
-    console.log(loginInfo)
-    const res = await fetch('http://localhost:3000/users/signin', {
+//post login info and get token APIs
+export const user_login = async(info) => {
+    
+    let res = await fetch('http://localhost:3000/users/signin', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
    
-        body: JSON.stringify(loginInfo)
+        body: JSON.stringify(info)
       });
 
     let payload = await res.json();
-    
-    console.log("USER DATA", payload.message);
-    return {
-        type: 'GET_USER_DATA',
-        payload: payload.message
-    }
-}
-// Roadmaps API
 
-// const dataURL = ;
-
-export const getRoadmap = async(career, track) => {
-    console.log(career);
-    const response = await fetch("http://localhost:3000/career/");
-    console.log(response)
-    let payload = await response.json();
-    // let payload = 
-    console.log("DATA", payload);
     return {
-        type:"GET_ROADMAP",
-        payload: payload.career.map( (cr) => {
-            if(cr.careerName === career) {
-                return cr.track.map( (tr) => {
-                    if(tr.trackName === track) {
-                        return tr.course
-                    }
-                })
-            }
-        })
-    }
-}
-
-//get user by id
-export const getUserById = async(id) => {
-    const response = await fetch(`http://localhost:3000/users/${id}`);
-    let payload = await response.json();
-    // console.log("DATA", payload);
-    return {
-        type:"GET_FULL_DATA",
+        type: 'LOGIN',
         payload
     }
-    
 }
-
-//update user data by id:
-export const updateUserById = async(id, userInfo) => {
-
-    console.log("ACTION RECEIVED DATA", userInfo);
-    const requestOptions = {
+//post signup info APIs
+export const user_signup = async(info) => {
+    
+    let res = await fetch('http://localhost:3000/users/signup', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
    
-        body: JSON.stringify(userInfo)
-      };
-    const res = await fetch(`http://localhost:3000/users/updateuser/${id}`, requestOptions);
+        body: JSON.stringify(info)
+      });
 
     let payload = await res.json();
-    
+
     return {
-        type: 'UPDATE_USER',
+        type: 'SIGNUP',
         payload
     }
 }
 
-//samples API
-export const getSamples = async() => {
+//get user information by mail
+export const get_full_user_info = async(email) => {
 
-    const response = await fetch("http://localhost:3003/samples");
-    let payload = await response.json();
-    // console.log("DATA", payload);
-    return {
-        type:"GET_SAMPLES",
-        payload
-    }
-}
-
-export const addSample = async(sampleInfo) => {
-
-    // console.log("ACTION RECEIVED DATA", sampleInfo);
-    
-    const res = await fetch("http://localhost:3003/samples", {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-        body: JSON.stringify(sampleInfo)
-    });
-
-    let payload = await res.json();
-    
-    return {
-        type: 'ADD_SAMPLE',
-        payload
-    }
-}
-
-//careers: get all careers:
-export const getCareers = async() => {
-
-    const response = await fetch("http://localhost:3000/career/");
-    let payload = await response.json();
-    // console.log("DATA", payload);
-    return {
-        type:"GET_CAREERS",
-        payload
-    }
-}
-
-//get userCareer 
-export const UpdateUserCareers = async(career_id, careerInfo) => {
-
-    console.log("ACTION RECEIVED DATA", careerInfo);
-    const requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-   
-        body: JSON.stringify(careerInfo)
-      };
-    const res = await fetch(`http://localhost:3000/userCareer/${career_id}`, requestOptions);
-
-    let payload = await res.json();
-    // console.log("USERCAREER", payload);
-    return {
-        type: 'UPDATE_USER_CAREER',
-        payload
-    }
-}
-
-//get all user_career 
-export const gatAllUserCareer = async() => {
-
-    const response = await fetch("http://localhost:3000/userCareer/");
-    let payload = await response.json();
-    console.log("DATA", payload);
-    return {
-        type:"GET_ALL_USER_CAREER",
-        payload
-    }
-}
-//get all user data by mail 
-export const getUserInfo = async(mail) => {
-    // console.log("EMAIL", mail);
     const requestOptions = {
         method: "GET",
         headers: { "Content-Type": "application/json" },
     };
     
     const res = await fetch(
-        `http://localhost:3000/users/userInfo/${mail}`,
+        `http://localhost:3000/users/userInfo/${email}`,
         requestOptions
     );
 
     let payload = await res.json();
-
-    // console.log("USERCAREER", payload);
 
     return {
         type: 'GET_ALL_USER_INFO',
@@ -194,48 +66,89 @@ export const getUserInfo = async(mail) => {
     }
 }
 
-// /userInfo/
-//Resources APIs
-// export const getAllResources = async(career, track) => {
+//update userInfo by id APIs
+export const update_user_data = async(info, id) => {
+    console.log(info)
+    let res = await fetch(`http://localhost:3000/users/updateuser/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+   
+        body: JSON.stringify(info)
+      });
 
-//     const response = await fetch("http://localhost:3000/career/");
-//     let data = await response.json();
-//     let payload = data.career.map( (cr) => {
+    let payload = await res.json();
 
-//         if(cr.careerName === career) {
-//             return cr.track.map( (tr) => {
-//                 if(tr.trackName === track) {
-//                     return tr.course
-//                 }
-//             })
-//         }
-//         // return payload;
-//     })
+    return {
+        type: 'UPDATE_USER_DATA',
+        payload
+    }
+}
+
+//Join track selected with user APIs
+export const join_track_with_user = async(info) => {
     
-//     console.log("DATA", payload);
-//     return {
-//         type:"GET_RESOURCES",
-//         payload
-//     }
-// }
+    let res = await fetch('http://localhost:3000/userCareer/', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+   
+        body: JSON.stringify(info)
+      });
 
-//career information APIs
-// export const getInformation = async(title) => {
+    let payload = await res.json();
 
-//     const response = await fetch(`http://localhost:3020/careers/${title}`);
-//     let payload = await response.json();
-//     console.log("INFORMATION", payload.title);
-//     return {
-//         type:"GET_INFORMATION",
-//         payload: payload.title
-//     }
-// }
+    return {
+        type: 'JOIN_TRACK_WITH_USER',
+        payload
+    }
+}
 
-//update user status
-export const updateUserStatus  = async(status) => {
+//update step with user APIs
+export const update_user_career = async(info, id) => {
+    
+    let res = await fetch(`http://localhost:3000/userCareer/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+   
+        body: JSON.stringify(info)
+      });
 
-    return{
-        type: 'UPDATE_STATUS',
-        payload: status
+    let payload = await res.json();
+
+    return {
+        type: 'UPDATE_USER_CAREER',
+        payload
+    }
+}
+
+//get all users careers
+export const getAllUsersCareers = async() => {
+
+    let res = await fetch('http://localhost:3000/userCareer/');
+    let payload = await res.json();
+
+    return {
+        type: 'GET_USERS_CAREERS',
+        payload
+    }
+}
+//get all tracks in a career by name APIs
+
+export const getTracks = async(careerName) => {
+
+    const requestOptions = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    };
+    
+    const res = await fetch(
+        `http://localhost:3000/career/tracks/${careerName}`,
+        requestOptions
+    );
+
+    let payload = await res.json();
+
+    return {
+        type: 'GET_TRACKS',
+        payload
     }
 }

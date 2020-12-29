@@ -3,14 +3,14 @@ import logo from "../../assets/surface1.svg";
 import React, { Component } from "react";
 //redux
 import { connect } from "react-redux";
-// import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import Login from './login';
 
 //actions
 // import {addUser} from '../../actions';
 // import { updateUserStatus } from './../../actions/index';
-import * as actions from '../../actions'
-class signUp extends Component {
+
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,11 +20,7 @@ class signUp extends Component {
       userData: {
 
       },
-      loginData: {
-
-      },
       errors: {},
-      sign_In: false,
       user_status: false
       
     };
@@ -117,15 +113,7 @@ class signUp extends Component {
     return formIsValid;
   }
   //adding handleChange function to input
-  handleOnChangeLogin = (e) => {
-
-    let loginData = this.state.loginData
-
-    loginData[e.target.name] = e.target.value
-
-    this.setState({loginData});
-  }
-
+  
   handleChange = (e) => {
     let fields = this.state.fields
     fields[e.target.name] = e.target.value;
@@ -156,33 +144,30 @@ class signUp extends Component {
       break;
 
       default:
-        return "No"
+        return ""
 
     }
-    this.setState({userData});
+    this.setState({userData});//update state with sign up info
     
   }
-  
+  //handle submit data to db
   handleSubmit = (e) => {
     e.preventDefault();
     //handle not matched passwords!
     if(this.handleValidation()) {
 
       console.log('Submitted!', this.state.userData);
-
-      this.props.addUser(this.state.userData);
+      //call action
+      
+      // this.setState({'sign_In': true});
+      this.props.history.push('/login');//redirected to login
 
     } else {
       console.log("form has errors");
     }
 
   }
-  handleSignIn = (e) => {
-    e.preventDefault();
-      console.log('SignedIn!', this.state.userData);
-      this.props.getUserData(this.state.loginData);
-      this.props.history.push('/');
-  }
+  
 
   render() {
     return (
@@ -235,11 +220,9 @@ class signUp extends Component {
                 <p>
                   Already have an account?
                   <a
-                    href=" "
+                    href="/login"
                     onClick={(e) => {
-                      e.preventDefault()
-                      this.setState({ sign_In: true });
-                      
+                      this.props.history.push('/login')
                     }}
                   >
                     Sign In
@@ -250,27 +233,9 @@ class signUp extends Component {
           )}
            {/**************** * SIGN UP end*********************/}
             {/**************** * SIGN IN START*********************/}
-          {this.state.sign_In && (
-            <form onSubmit={this.handleSignIn}>
-              <div className="signUp">
-                <p>Sign in</p>
-                <p>Welcome Back</p>
-              </div>
-              <div className="signUp-form">
-                <input type="text" placeholder="Email Address" onChange={this.handleOnChangeLogin} name="mail"/>
-
-                <input type="text" placeholder="Password" onChange={this.handleOnChangeLogin} name="password" />
-
-              </div>
-              <div className="signIn-text">
-                <a href=" ">Forgot Password?</a>
-              </div>
-
-              <div className="signIn-btn">
-                <input type="submit" value="Sign In"/>
-              </div>
-            </form>
-          )}
+          {/* {this.state.sign_In && (
+            <Login />
+          )} */}
           {/**************** * SIGN IN END*********************/}
         </div>
         {/**************** * RIGHT BOX END DIV*********************/}
@@ -278,19 +243,16 @@ class signUp extends Component {
     );
   }
 
-  componentWillUnmount() {
-    localStorage.setItem("user_auth", this.props.user_auth);
-    localStorage.setItem("user_mail", this.state.userData.mail);
-  }
+ 
 }
 
 
 const mapStateToProps = (state) => {
   return {
-    user_auth: state.users.login_info
+    // user_auth: state.users.login_info
   }
 }
 // const mapDispatchToProps = (dispatch) => {
 //   return bindActionCreators({addUser, updateUserStatus}, dispatch);
 // }
-export default connect(mapStateToProps, actions)(withRouter(signUp));
+export default connect(mapStateToProps)(withRouter(SignUp));

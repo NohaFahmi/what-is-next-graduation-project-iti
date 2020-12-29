@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import { Divider, Progress } from 'antd'
 import { CaretRightOutlined, TrophyOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import *as actions from '../../actions';
+import * as actions from '../../actions';
 import { createFromIconfontCN } from '@ant-design/icons';
 //components
-import Tasks from './tasks';
 import Stepper from './stepper';
 import Loading from '../loading/loading';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+import { Redirect } from 'react-router-dom';
+// ..
 
 //IconFont
 const IconFont = createFromIconfontCN({
@@ -21,76 +23,39 @@ class Roadmap extends Component {
     constructor() {
         super();
         this.state = {
-            checked_btn: "",//store the checked step id 
             user_track: '',
             user_career: '',
-            disabled: true,
-            checked: false, //for disable all steps before starting
-            visible_task: false, //to check task is visible
+            clicked: false,
+            started: false,
             percent: 0, //to indicate the progress
-            current: 0, //to indicate the current step
-            done: true, //to check the done step in progress bar
+            current: 0,
+            // shadow: '-5px 3px 1px ' + (Math.floor(Math.random() * colors.length))
         }
-        console.log("ROADMAP", this.props)
 
     }
-    //handle check that step is done!
-    handleMarkedCompleted = (e) => {
-        // console.log("CHECKED", e.target.checked);
-        // console.log("REF", e.target.id);
-        this.setState({
-            checked_btn: e.target.id,
-            visible_task: e.target.checked,
-            checked: e.target.checked,
-            done: true,
-        });
-        //if checkbox is checked
-        if (e.target.checked) {
-            this.next(); //increase the current value
-            this.increase(this.props); //increase the main progress
-            // console.log("next");
-        } else {
-            this.prev(); // decrease the current value
-            this.decrease(this.props); //increase the main progress
 
-
-            // console.log("prev");
+    /**-------------------------------------------------- */
+    increase = ({ listOfTracks }, i) => {
+        if(listOfTracks) {
+            return listOfTracks.map((track) => {
+                if (track.trackName === localStorage.getItem('track_selected')) {
+                    return this.setState({percent: Math.floor(((i+1) * 100) / (track.course.length))})
+                }
+            })
         }
-        //how to keep this element marked as done???????
-        /* this.setState((prev) => {
-            return {
-                ...prev,
-                done: true,
-                selected: prev.checked_btn
-            }
-        }) */
     }
-
     
     /**-------------------------------------------------- */
-    next = () => {
-        this.setState({ current: this.state.current + 1 })
+    //handle check that step is done!
+    updateCurrentStep = (e) => {
+        let index = e.target.id.split('-')
+        this.setState({current: parseInt(index[2]) + 1})
+        this.increase(this.props, parseInt(index[2]))
     }
-
-    prev = () => {
-        this.setState({ current: this.state.current - 1 })
-    }
-
-    increase = ({ steps }) => {
-        console.log("CURRENT", this.state.current)
-        this.setState({ percent: Math.floor((((this.state.current + 1) * 100) / steps.length)) })
-    }
-    decrease = ({ steps }) => {
-        console.log("CURRENT", this.state.current)
-        this.setState({ percent: Math.floor((((this.state.current - 1) * 100) / steps.length)) })
-    }
-
-    /**-------------------------------------------------- */
-
     //function handling the start button
     handleStart = (e) => {
         console.log("Started!");
-        this.setState({ disabled: false });//enable all checkboxes
+        this.setState({started: true});
     }
     //function handling displaying the main progress circe after start btn pressed
     renderCircularProgress = () => {
@@ -98,132 +63,183 @@ class Roadmap extends Component {
         return (<Progress type="circle" percent={this.state.percent} strokeColor={'#1FB46B'} strokeWidth={12} />)
     }
     handleSave = () => {
-        if((this.state.current !== 0) && (this.state.percent !== 0)) {
-            console.log('saved!');
-            localStorage.setItem("current-user-step", this.state.current);
-            localStorage.setItem("current-percent", this.state.percent);
-            localStorage.setItem('checked_btn', this.state.checked_btn);
-
-        } else {    
-            console.log("Nothing to save!")
-
-        }
-            
+        //update user career with step
+        let data = {
+            user: {
+                    _id: localStorage.getItem('user_id'),
+                    step:this.state.current
+                 }
+            ,
+            career: localStorage.getItem('career_id')
+         }
+         if(!this.state.clicked) {
+            this.props.join_track_with_user(data)
+            this.setState({clicked: true})
+         }
+         this.handleUpdateUserData(this.props, data)
+         localStorage.setItem('current_step', this.state.current);
+         localStorage.setItem('current_progress', this.state.percent);
 
     }
+    handleUpdateUserData = ({user_career_id}, info) => {
+        if(user_career_id) {
+            this.props.update_user_career(info, user_career_id._id)
+        }
+    }
+
+    getUserCareerById = ({all_users_careers, user_career_id}) => {
+        if(all_users_careers && user_career_id) {
+            all_users_careers.map((user_career) => {
+                if(user_career._id === user_career_id._id) {
+                    return this.setState({current: user_career.user[0].step})
+                }
+            })
+        }
+    }
+ 
     //render all the steps number on the left and the track steps coming from database
-    renderStepsWrapper = ({ steps }) => {
+    renderStepsWrapper = ({ listOfTracks }) => {
+        if (listOfTracks) {
+            return listOfTracks.map((track) => {
+                if (track.trackName === localStorage.getItem('track_selected')) {
+                    return track.course.map((step_course, index) => {
+                        return (
+                            <div key={step_course._id}>
+                                <div className="step-wrapper" id={'step-' + step_course._id}>
+                                {/* toggle done and undone */}
+                                    {(index+1 <= this.state.current) ? <div className='step-num done'><span>{index+1}</span></div> : (index+1 === (this.state.current + 1)) ? <div className='step-num current'><span><IconFont type='icon-currentlocation' /></span></div> : <div className='step-num undone'><span>{index+1}</span></div>
+                                    }
 
-        if (steps) {
-            return steps.map((step, index) => {
-                return (
-                    <div key={`main-${step._id}`}>
-                        <div className="step-wrapper">
-                            {(this.state.disabled)? <div className='step-num undone'><span>{steps.indexOf(step) + 1}</span></div>
-                             : 
-                            ((this.state.visible_task) && (this.state.checked_btn === 'check-' + step._id) && (this.state.checked)) ? <div className='step-num current'><span><IconFont type='icon-currentlocation' /></span></div> : <div className='step-num done'><span>{steps.indexOf(step) + 1}</span></div>
-                            }
+                                    
 
-                            {/* {(this.state.disabled) ?
-                                (<div className='step-num undone'><span>{step.index}</span></div>) :
-                            ((this.state.visible_task) && (this.state.checked_btn === 'check-' + step.id)) ?
-                                (<div className='step-num done'><span>{step.index}</span></div>) :
-                            ((this.state.visible_task) && (this.state.checked)) ?
-                                (<div className='step-num current'><span><IconFont type='icon-currentlocation' /></span></div>) :
-                                (<div className='step-num undone'><span>{step.index}</span></div>)
-                            }
-                             */}
-                            <div className='step-details'>
-                                <div className="details">
-                                    <h6 className="main">{step.courseName}</h6>
-                                    {/* <p className="sub">{step.title.sub}</p> */}
-                                    <p className="time">Estimated Time: {step.estimatedTime}</p>
+    
+                                    <div className='step-details' data-aos="flip-up"  data-aos-duration="400" data-aos-easing="ease-in-out">
+                                        <div className='details'>
+                                            <h6 className="step-title"><a href=' '>{step_course.courseName}</a></h6>
+                                            <p className='step-time'>Estimated Time: {step_course.estimatedTime}</p>
+                                        </div>
+                                        {/* check button */}
+                                        {(!this.state.started) ? <div className='icon'><label htmlFor={'check-box-' + index}>Mark as Completed</label>
+                                            <input type='checkbox' data-toggle='collapse' data-target={`.multi-${step_course._id}`} id={'check-box-' + index} aria-controls={`task-${step_course._id}`} onChange={this.updateCurrentStep} disabled/></div> : 
+
+                                            ((index+1 <= this.state.current)) ?  <div className='icon'><label htmlFor={'check-box-' + index}>Done <a href={`#task-${step_course._id}`} data-toggle='collapse' role='button'  aria-controls={`task-${step_course._id}`}>show Tasks</a></label>
+                                            <input type='checkbox'  id={'check-box-' + index} checked disabled/></div> : <div className='icon'><label htmlFor={'check-box-' + index}>Mark as Completed</label>
+                                            <input type='checkbox' data-toggle='collapse' data-target={`.multi-${step_course._id}`} id={'check-box-' + index} aria-controls={`task-${step_course._id}`} onChange={this.updateCurrentStep}/></div>
+                                            }
+
+                                    </div>
+
+                                    {/* -------toggle tasks ------*/}
+                                    {(step_course.task.length > 0) ?
+                                    <div className={`collapse tasks-visible multi-${step_course._id}`} id={`task-${step_course._id}`}>
+                                        <div className="task-details">
+                                            <p className="text">Well Done!</p>
+                                            <h4>Recommended Tasks</h4>
+                                            <div className="tasks-wrapper">
+                                             {step_course.task.map((task_item, index) => {
+                                                return (
+                                                    
+                                                        <div className='task' key={task_item._id}>
+                                                            <button className="btn btn-primary task-btn" type="button" data-toggle="collapse" data-target={"#task-" + index} aria-expanded="false" aria-controls="collapseExample">
+                                                                {task_item.taskName}</button>
+                                                            <div className="collapse visible" id={"task-" + index}>
+                                                                <p className="card card-body">{task_item.description}</p>
+                                                            </div>
+                                                        </div>
+                                                )
+                                            })}
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    
+                                        : null}
+
+
+
                                 </div>
-                                <div className='icon'>
-                                    <label htmlFor={`check-${step.id}`}>mark as Completed</label>
-                                    <input type="checkbox" onChange={(e) => this.handleMarkedCompleted(e, step)} id={`check-${step._id}`} className="check-box" disabled={this.state.disabled} />
+                                {
+                                    (index  === (track.course.length)) ? '' : <Divider type="vertical" className="line" orientation='left' /> 
 
-                                </div>
+                                                                                    
+
+                                }
                             </div>
-
-                            {/* -------toggle tasks ------*/}
-                            {(this.state.visible_task && (step.task.length > 0) && (this.state.checked_btn === 'check-' + step._id)) && <Tasks tasks={step.task} id={step._id} state={this.state} />}
-
-                        </div>
-                        {(index === (steps.length -1)) ? " " : <Divider type="vertical" className="line" orientation='left' />}
-                        
-                    </div>
-                );
+                        )
+                    })
+                }
             })
         }
 
-        return <Loading />
+        // return <Loading />
     }
     render() {
-        return (
-            <div className="roadmap-container">
-
-                <div className="progress-container">
-                    <div className="start" >
-                        {(this.state.disabled) && <button className="start-btn" onClick={this.handleStart}>Start <CaretRightOutlined className="start-icon" /></button>}
-
-                        {((!this.state.disabled)) ? this.renderCircularProgress() : ''}
-
-                        <button className='save' onClick={this.handleSave}>Save Progress</button>
-
-                    </div>
-                </div>
-                <div className='step-container'>
-                    <Stepper current={this.state.current}/>
+        if (localStorage.getItem('auth_token')) {
+            return (
+                <div className="roadmap-container">
+    
+                    <div className="progress-container">
+                        <div className="start" >
+                            {(!this.state.started) && (this.state.current === 0) && <button className="start-btn" onClick={this.handleStart}>Start <CaretRightOutlined className="start-icon" /></button>}
+    
+                            {((this.state.started) || (this.state.current > 0)) ? this.renderCircularProgress() : ''}
+    
+                        </div>
                     
-                    <div className="roadmap">
-                        {this.renderStepsWrapper(this.props)}
+                        <div className='stp-cont'>
+    
+                        <button className='save' onClick={this.handleSave}>Save Progress</button>
+    
+                        </div>
                     </div>
-
+                    <div className='step-container'>
+                        
+                        <div className="roadmap">
+                            
+                            {this.renderStepsWrapper(this.props)}
+                        </div>
+    
+                    </div>
+    
                 </div>
-
-            </div>
-
-        )
+    
+            )
+        } 
+        else {
+            return <Redirect to='/signup' />
+        }
     }
 
     componentDidMount() {
-        // console.log(this.state.checked);
-        // console.log('PROPS', this.props);
-        //get all steps from API
-        // this.handleMarkedCompleted()
-        // console.log("DONE",this.state.done)
-        // console.log("selected",this.state.selected)
-        const selectedTrack = localStorage.getItem('selectedTrack');
-        const selectedCareer = localStorage.getItem('selectedCareer');
-        this.setState({'user_track': selectedTrack, 'user_career': selectedCareer});
-        this.props.getRoadmap(selectedCareer, selectedTrack);//calling the action to get api data
-       
-        const curr = localStorage.getItem('current-user-step')
-        const per = localStorage.getItem('current-percent')
-        if(curr && per) {
-            this.setState({'current': curr, 'percent': per})
-            const disabled = (curr > 0) ? false : true
+        AOS.init();
 
-            this.setState({'disabled': disabled})
+        const careerSelected = localStorage.getItem('careerSelected');
+        this.props.getTracks(careerSelected);
+        this.props.getAllUsersCareers();
+        if(this.state.clicked) {
+            this.getUserCareerById(this.props);
         }
-        
-        // this.setState({'current': curr, 'percent': per})
-        // this.setState({'percent': localStorage.getItem('current-percent')})
-
-        
-        console.log(selectedTrack)
+        let percent = localStorage.getItem('current_progress');
+        let step = localStorage.getItem('current_step');
+        if(percent && step){
+            
+            this.setState({'started': true, 'current': parseInt(step), 'percent': parseInt(percent)})
+        }
     }
-
-    
 
 }
 
+
+
 const mapStateToProps = (state) => {
-    // console.log('STATE ROADMAP', state.roadmap.steps);
+    // console.log('STATE ROADMAP', state.careers.tracks);
 
     return {
-        steps: state.roadmap.steps,
+        listOfTracks: state.careers.tracks,
+        user_career_id: state.users.user_track,
+        all_users_careers:state.users.all_user_careers
     }
 }
 export default connect(mapStateToProps, actions)(Roadmap);

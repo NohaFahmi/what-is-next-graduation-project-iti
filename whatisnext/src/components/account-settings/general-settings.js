@@ -1,28 +1,29 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import { Divider } from 'antd';
 import userAvatar from '../../assets/user.svg';
 import { EditOutlined } from '@ant-design/icons'
 import Files, { ImageCropper } from "react-butterfiles";
+import * as actions from '../../actions';
+import { connect } from 'react-redux';
 
 
 class GeneralSettings extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
         this.state = {
             name_disabled: true,
             email_disabled: true,
             save_disabled: true,
-            data: {
-
-            },
+            data: {},
             cropper: true,
             files: [],
             errors: [],
         }
-
+        console.log(props);
     }
 
     handleSuccess = () => {
@@ -51,30 +52,40 @@ class GeneralSettings extends Component {
 
         this.setState({ save_disabled: false })
         let data = this.state.data
-        data[e.target.name] = e.target.value
+    
+        if (e.target.name === 'profilPicture') {
+        this.setState({ save_disabled: false })
 
-        this.setState({ data })
-
-        if (e.target.name === 'image') {
-            // console.log(e.target.files)
+            const [file] = e.target.files
+            if(file) {
+                // console.log(file)
+                const reader = new FileReader()
+                // console.log(this.myRef)
+                const {current} = this.myRef
+                current.file = file
+                reader.onload = (e) => {
+                    current.src = e.target.result;
+                    data['profilPicture'] = e.target.result
+                    this.setState({ data })
+                    localStorage.setItem('profile_img', e.target.result)
+                    
+                }
+                reader.readAsDataURL(file);
+            }
+            
             //todo: handle upload photo and save to server!
+        } else {
+            data[e.target.name] = e.target.value
+            this.setState({ data })
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(this.state);
-        let data = this.state.data
-        data['firstName'] = this.props.basic_data.firstName
-        data['lastName'] = this.props.basic_data.lastName
-        data['mail'] = this.props.basic_data.mail
-
-        this.setState({
-            data
-        })
-
-        this.props.getData(this.state.data);
-
+        // console.log('submitted!');
+        // const id= localStorage.getItem('user_id')
+        console.log(this.state.data.profilPicture)
+        this.props.update_user_data(this.state.data, this.state.data._id);
     }
     render() {
 
@@ -84,12 +95,10 @@ class GeneralSettings extends Component {
                     <Form.Row className='align-items-end'>
                         <div className="settings-avatar">
 
-
-           
-                            {/* <img src={userAvatar} alt="user-avatar" /> */}
+                            <img ref={this.myRef} alt="user-avatar" src={this.state.data.profilPicture}/>
                         </div>
                         <Form.Group>
-                            <input id="account-pic" type='file' name='image' className='form-file' onChange={this.handleChange} />
+                            <input id="account-pic" type='file' name='profilPicture' className='form-file' onChange={this.handleChange} />
                             <label htmlFor="account-pic" className="form-control-file">Change Your Account Picture</label>
 
                         </Form.Group>
@@ -128,21 +137,42 @@ class GeneralSettings extends Component {
     }
 
     componentDidMount() {
-
-        // console.log("DATAAAA", this.props.basic_data);
-        // let data = this.state.data
-        // data['f_name'] = this.props.basic_data[0].f_name
-        // data['l_name'] = this.props.basic_data[0].l_name
-        // data['email'] = this.props.basic_data[0].email
-
-        // this.setState({
-        //     data
-        // })
-
-        // this.props.getData(this.state.data);
+        const login_token = localStorage.getItem('auth_token');
+        if(login_token) {
+            this.setState({'user': login_token, 'profile': true})
+        }
+        const email = localStorage.getItem('user_mail');
+        if(email) {
+            console.log(email)
+            this.props.get_full_user_info(email);
+            if(this.props.get_full_user_info(email)) {
+                let data = this.state.data
+                data['_id'] = this.props.user_data.user[0]._id
+                data['firstName'] = this.props.user_data.user[0].firstName
+                data['lastName'] = this.props.user_data.user[0].lastName
+                data['mail'] = this.props.user_data.user[0].mail
+                data['password'] = this.props.user_data.user[0].password
+                data['age'] = (this.props.user_data.user[0].age) ? this.props.user_data.user[0].age : ''
+                data['gender'] = (this.props.user_data.user[0].gender) ? this.props.user_data.user[0].gender : ''
+                data['location'] = (this.props.user_data.user[0].location) ? this.props.user_data.user[0].location : ''
+                data['bio'] = (this.props.user_data.user[0].bio) ? this.props.user_data.user[0].bio : ''
+                data['socialLinks'] = (this.props.user_data.user[0].socialLinks) ? this.props.user_data.user[0].socialLinks : ''
+                data['profilPicture'] = (this.props.user_data.user[0].profilPicture) ? this.props.user_data.user[0].profilPicture : ''
+                this.setState({
+                    data
+                })
+            }   
+            
+        }
+    }
+}
+const mapStateToProps = (state) => {
+    // console.log('STATE SETTINGS', state.users.user_info);
+    return {
+        user_data: state.users.user_info,
+        update_msg: state.users.new_data
 
     }
 }
 
-
-export default GeneralSettings;
+export default connect(mapStateToProps,actions)(GeneralSettings);

@@ -50,7 +50,7 @@ const ModalForm = ({ allSteps, current, addNewSample, sendType }) => {
         e.preventDefault();
         sendType(sampleType);
         addNewSample(taskData);
-        console.log("TASK DATA", taskData);
+        // console.log("TASK DATA", taskData);
         
     }
     // console.log("options", allSteps);
