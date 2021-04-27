@@ -12,7 +12,7 @@ ITI graduation project, 3-months intensive training program, Frontend & Cross-Pl
 #### TEAM MEMBERS
 ---
 - Ahmed Maher
-- Amed Yasser
+- Ahmed Yasser
 - Manar Yehia
 - Noha Mohammed Bahaa El-Din
 - Noha Mohammed Malek.
